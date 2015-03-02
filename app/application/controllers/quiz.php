@@ -23,6 +23,8 @@ class Quiz extends CI_Controller {
 		if($this->_no_such_user($data['phone'])){
 			$this->quiz_model->reg_user($data);
 		} 
+
+
 		else{
 			$usr_count = userCount($data['phone']);
 			$this->sendNextQue($data['phone'], $usr_count);	
