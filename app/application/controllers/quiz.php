@@ -24,8 +24,8 @@ class Quiz extends CI_Controller {
 			$this->quiz_model->reg_user($data);
 
 		} 
-		else
-		# a registered user
+		/*else
+		# a registered user*/
 
 	}
 	public function _no_such_user($phone){

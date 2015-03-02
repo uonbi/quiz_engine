@@ -11,12 +11,17 @@ class Quiz_model extends CI_Model {
 			return false;
 		}
 	}
-	public function validate(){
-
+	public function validate($phone_number, $msg, $time){
+		#@deebeat
+		
 	}
+
+
 	public function getNextQuestion(){
 
 	}
+
+
 	public function flagFails($member_id){
 		#flag a user, change probation to 1
 
