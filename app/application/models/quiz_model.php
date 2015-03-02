@@ -20,11 +20,22 @@ class Quiz_model extends CI_Model {
 	public function validate(){
 
 	}
-	public function getNextQuestion(){
+	public function getQuestion($que_num){
 
+		$result = $this->db->get_where('quest_answer',array('quiz_id'=>$que_num));
+		if($result){
+			return $result;
+		} else {
+			return false;
+		}
 	}
 	public function usr_count($phone){
-		$result = $this->get_where('members',array('phone'=>$phone))
+		$result = $this->db->get_where('members',array('phone'=>$phone));
+		if($result){
+			return $result;
+		} else {
+			return false;
+		}
 	}
 
 	public function flagFails($member_id){
