@@ -60,7 +60,7 @@ class Quiz_model extends CI_Model {
 
 	#@deebeat
 	#get the answer to question submitted
-	private get_system_answer($question)
+	private function get_system_answer($question)
 	{
 		#get the correct system answer
 		$answer = $this->db->get_where("quest_answer", array('quiz_id'=>$question));
