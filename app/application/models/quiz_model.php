@@ -23,6 +23,10 @@ class Quiz_model extends CI_Model {
 	public function getNextQuestion(){
 
 	}
+	public function usr_count($phone){
+		$result = $this->get_where('members',array('phone'=>$phone))
+	}
+
 	public function flagFails($member_id){
 		#flag a user, change probation to 1
 

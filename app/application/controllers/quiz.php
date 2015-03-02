@@ -27,9 +27,12 @@ class Quiz extends CI_Controller {
 		}	
 	}
 	public function _no_such_user($phone){
-
 		return $this->quiz_model->is_available($phone);
 	}
+	public function userCount($phone){
+		return $this->quiz_model->usr_count($phone);
+	}
+
 	public function sendNextQue(/*$phone, $question*/){
 
 	}	
