@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 02, 2015 at 06:01 PM
+-- Generation Time: Mar 02, 2015 at 07:42 PM
 -- Server version: 5.5.41-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.6
 
@@ -40,7 +40,7 @@ CREATE TABLE IF NOT EXISTS `members` (
 --
 
 INSERT INTO `members` (`member_id`, `name`, `phone`, `quiz_count`) VALUES
-(1, 'test', '+254720255774', 0);
+(1, 'test', '+254720255774', 1);
 
 -- --------------------------------------------------------
 
@@ -68,7 +68,14 @@ CREATE TABLE IF NOT EXISTS `quest_answer` (
   `question` varchar(160) NOT NULL,
   `answer` varchar(50) NOT NULL,
   PRIMARY KEY (`quiz_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `quest_answer`
+--
+
+INSERT INTO `quest_answer` (`quiz_id`, `question`, `answer`) VALUES
+(1, 'what is my name?', 'nerd');
 
 -- --------------------------------------------------------
 

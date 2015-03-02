@@ -49,8 +49,8 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'karanja';
-$db['default']['password'] = 'nannymcphee';
+$db['default']['username'] = 'quiz';
+$db['default']['password'] = '#quiz2015';
 $db['default']['database'] = 'quiz_engine';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
