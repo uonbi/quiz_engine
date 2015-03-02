@@ -22,15 +22,11 @@ class Quiz extends CI_Controller {
 		if($this->_no_such_user($data['phone'])){
 			$this->quiz_model->reg_user($data);
 		} 
-<<<<<<< HEAD
-		/*else
-		# a registered user*/
 
-=======
+
 		else{
 			$this->sendNextQue();	
 		}	
->>>>>>> f7411f4921a9c481f8a720996968c4f3527f44b3
 	}
 	public function _no_such_user($phone){
 		return $this->quiz_model->is_available($phone);

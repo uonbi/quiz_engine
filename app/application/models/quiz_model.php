@@ -17,22 +17,69 @@ class Quiz_model extends CI_Model {
 			return false;
 		}
 	}
-	public function validate($phone_number, $msg, $time){
+
+	#@deebeat. Check if user is correct
+	public function validate($phone, $user_answer, $time)
+	{
 		#@deebeat
-		
+		$user_answer = strtolower($user_answer);
+		$question = $this->get_question_count($phone);
+
+		#get correct answer
+		$correct_answer = $this->get_system_answer($question + 1);
+
+		if($user_answer == $correct_answer)
+		{
+			#send next question
+			$next_quiz = $this->getQuestion($question + 1);
+			return $this->sendNextQue($phone, $next_quiz);
+
+		}
+		else
+		{
+			#wrong, resend same question
+			$same_quiz = $this->getQuestion($question);
+			return $this->sendNextQue($phone, $next_quiz);
+
+		}
+	}
+
+	#@deebeat. Get question user is working on
+	private function get_question_count($phone)
+	{
+		$question_row = $this->usr_count($phone);
+
+		#get count
+		foreach ( ($question_row->result()) as $value)
+		{
+			$count = $value->quiz_count;
+		}
+
+		return $count;
+	}
+
+	#@deebeat
+	#get the answer to question submitted
+	private get_system_answer($question)
+	{
+		#get the correct system answer
+		$answer = $this->db->get_where("quest_answer", array('quiz_id'=>$question));
+
+		foreach ($answer->result() as  $value)
+		{
+			$answer = $value->answer;
+		}
+		return $answer;
 	}
 
 
 	public function getNextQuestion(){
 
 	}
-<<<<<<< HEAD
 
-=======
 	public function usr_count($phone){
-		$result = $this->get_where('members',array('phone'=>$phone))
+		$result = $this->get_where('members',array('phone'=>$phone));
 	}
->>>>>>> f7411f4921a9c481f8a720996968c4f3527f44b3
 
 	public function flagFails($member_id){
 		#flag a user, change probation to 1
