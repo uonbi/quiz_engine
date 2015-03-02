@@ -2,10 +2,16 @@
 
 class Quiz_model extends CI_Model {
 	private $data;
-	
+
 	public function reg_user($data){
 		$status = $this->db->insert('members', $data);
 		if($status){
+			return true;
+		} else {}
+	}
+	public function is_available($phone){
+		$query = $this->db->get_where('members', array('phone' => $phone));
+		if($this->db->affected_rows() == 0){
 			return true;
 		} else {
 			return false;
