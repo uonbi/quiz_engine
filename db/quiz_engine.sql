@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 02, 2015 at 04:12 PM
+-- Generation Time: Mar 02, 2015 at 06:01 PM
 -- Server version: 5.5.41-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.6
 
@@ -29,11 +29,18 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `members` (
   `member_id` int(10) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
-  `phone_number` varchar(20) NOT NULL,
+  `phone` varchar(20) NOT NULL,
   `quiz_count` int(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`member_id`),
-  UNIQUE KEY `phone_number` (`phone_number`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  UNIQUE KEY `phone_number` (`phone`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `members`
+--
+
+INSERT INTO `members` (`member_id`, `name`, `phone`, `quiz_count`) VALUES
+(1, 'test', '+254720255774', 0);
 
 -- --------------------------------------------------------
 
@@ -42,11 +49,11 @@ CREATE TABLE IF NOT EXISTS `members` (
 --
 
 CREATE TABLE IF NOT EXISTS `probation` (
-  `probabtion_id` int(10) NOT NULL AUTO_INCREMENT,
+  `probation_id` int(10) NOT NULL AUTO_INCREMENT,
   `member_id` int(10) NOT NULL,
   `date_time` datetime NOT NULL,
   `probation_status` int(11) NOT NULL COMMENT 'locked=1,unlock=0',
-  PRIMARY KEY (`probabtion_id`),
+  PRIMARY KEY (`probation_id`),
   KEY `member_id` (`member_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
