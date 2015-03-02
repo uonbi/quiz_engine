@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 02, 2015 at 12:18 PM
+-- Generation Time: Mar 02, 2015 at 04:12 PM
 -- Server version: 5.5.41-0ubuntu0.14.04.1
--- PHP Version: 5.5.9-1ubuntu4.5
+-- PHP Version: 5.5.9-1ubuntu4.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -38,10 +38,10 @@ CREATE TABLE IF NOT EXISTS `members` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `probabtion`
+-- Table structure for table `probation`
 --
 
-CREATE TABLE IF NOT EXISTS `probabtion` (
+CREATE TABLE IF NOT EXISTS `probation` (
   `probabtion_id` int(10) NOT NULL AUTO_INCREMENT,
   `member_id` int(10) NOT NULL,
   `date_time` datetime NOT NULL,
@@ -86,10 +86,10 @@ CREATE TABLE IF NOT EXISTS `submissions` (
 --
 
 --
--- Constraints for table `probabtion`
+-- Constraints for table `probation`
 --
-ALTER TABLE `probabtion`
-  ADD CONSTRAINT `probabtion_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `members` (`member_id`);
+ALTER TABLE `probation`
+  ADD CONSTRAINT `probation_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `members` (`member_id`);
 
 --
 -- Constraints for table `submissions`
