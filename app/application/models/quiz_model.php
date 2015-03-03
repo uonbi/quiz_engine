@@ -18,33 +18,29 @@ class Quiz_model extends CI_Model {
 		}
 	}
 
-	#@deebeat. Check if user is correct
+	#@deebeat. Check if user's answer is correct 
 	public function validate($phone, $user_answer, $time)
 	{
 		#@deebeat
-		$user_answer = strtolower($user_answer);
+		$user_answer = trim(strtolower($user_answer));
 		$question = $this->get_question_count($phone);
 
 		#get correct answer
-		$correct_answer = $this->get_system_answer($question + 1);
+		$correct_answer = trim($this->get_system_answer($question));
 
 		if($user_answer == $correct_answer)
 		{
-			#send next question
-			$next_quiz = $this->getQuestion($question + 1);
-			return $this->sendNextQue($phone, $next_quiz);
-
+			#correct answer
+			return true;
 		}
 		else
 		{
-			#wrong, resend same question
-			$same_quiz = $this->getQuestion($question);
-			return $this->sendNextQue($phone, $next_quiz);
-
+			#wrong answer
+			return false;
 		}
 	}
 
-	#@deebeat. Get question user is working on
+	#@deebeat. Get the question that the user is working on
 	private function get_question_count($phone)
 	{
 		$question_row = $this->usr_count($phone);
@@ -57,6 +53,7 @@ class Quiz_model extends CI_Model {
 
 		return $count;
 	}
+
 	#@deebeat
 	#get the answer to question submitted
 	private function get_system_answer($question)
@@ -70,6 +67,29 @@ class Quiz_model extends CI_Model {
 		}
 		return $answer;
 	}
+
+
+	#updates user's count when they get the answer right
+	public function update_usr($phone)
+	{
+		$this->db->where('phone', $phone);
+		$data = array();
+
+		#get question number for this user and update(ready for next question)
+		$data['quiz_count'] = $this->get_question_count($phone) + 1;
+
+		if ($this->db->update('members', $data)->run()){
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	#end_@deebeat module's
+
+
 	public function getQuestion($que_num){
 
 		$result = $this->db->get_where('quest_answer',array('quiz_id'=>$que_num));

@@ -14,12 +14,12 @@ class Quiz extends CI_Controller {
 	{
 		$this->(1);
 	}
+	
 	public function recv_sms($phone,$msg,$time){
 		#system access point
 		if($this->_no_such_user($phone)){
 			$this->reg_user($phone,$msg,$time);
 		} else {
-
 			#answer validations
 			$result = $this->quiz_model->validate($phone, $msg, $time);
 			if($result){
