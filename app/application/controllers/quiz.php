@@ -12,9 +12,12 @@ class Quiz extends CI_Controller {
 
 	public function index()
 	{
-		$this->(1);
+		$this->haha();
 	}
-	
+	public function haha(){
+		echo 'It is working hahaha XD';
+	}
+
 	public function recv_sms($phone,$msg,$time){
 		#system access point
 		if($this->_no_such_user($phone)){
