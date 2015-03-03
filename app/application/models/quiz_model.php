@@ -18,7 +18,7 @@ class Quiz_model extends CI_Model {
 		}
 	}
 
-	#@deebeat. Check if user is correct
+	#@deebeat. Check if user's answer is correct 
 	public function validate($phone, $user_answer, $time)
 	{
 		#@deebeat
@@ -44,7 +44,7 @@ class Quiz_model extends CI_Model {
 		}
 	}
 
-	#@deebeat. Get question user is working on
+	#@deebeat. Get the question that the user is working on
 	private function get_question_count($phone)
 	{
 		$question_row = $this->usr_count($phone);
@@ -57,6 +57,7 @@ class Quiz_model extends CI_Model {
 
 		return $count;
 	}
+
 	#@deebeat
 	#get the answer to question submitted
 	private function get_system_answer($question)
@@ -70,6 +71,9 @@ class Quiz_model extends CI_Model {
 		}
 		return $answer;
 	}
+	#end_@deebeat module's
+
+
 	public function getQuestion($que_num){
 
 		$result = $this->db->get_where('quest_answer',array('quiz_id'=>$que_num));

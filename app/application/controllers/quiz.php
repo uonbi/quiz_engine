@@ -14,6 +14,8 @@ class Quiz extends CI_Controller {
 	{
 		$this->getQuestion(1);
 	}
+
+	#pick values from API i.e, phone, name and time
 	public function reg_user(){
 		$data['phone'] =  '+254720255774';
 		$data['name']  =  'shimanyi';
