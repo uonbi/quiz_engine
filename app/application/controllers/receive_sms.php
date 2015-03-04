@@ -18,14 +18,14 @@ try
   // Our gateway will return 10 messages at a time back to you, starting with
   // what you currently believe is the lastReceivedId. Specify 0 for the first
   // time you access the gateway, and the ID of the last message we sent you
-  // on subsequent results
+  // on subsequent received_results
   $lastReceivedId = 0;
   
   // Here is a sample of how to fetch all messages using a while loop
   do {
     
-    $results = $gateway->fetchMessages($lastReceivedId);
-    foreach($results as $result) {
+    $received_results = $gateway->fetchMessages($lastReceivedId);
+    foreach($received_results as $result) {
       
       echo " From: " .$result->from;
       echo " To: " .$result->to;
@@ -40,7 +40,7 @@ try
       #check if 
       
     }
-  } while ( count($results) > 0 );
+  } while ( count($received_results) > 0 );
   
   // NOTE: Be sure to save lastReceivedId here for next time
   
