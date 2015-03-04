@@ -1,23 +1,26 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-#require_once('receive_sms.php');
+#helper gateway class
+require_once('AfricasTalkingGateway.php');
 
-#credentials
-$username   = "codejamer";
-$apikey     = "097b5f8c738a0bcfa8899ce0c7da3324a728c5921132e3b1c89065316fb00dae";
 
 class Quiz extends CI_Controller {
 
 	private $data;
-
+	
 	function __construct(){
 		parent::__construct();
 
 		$this->load->model('quiz_model');
+		
 	}
 
 	public function index()
 	{
+		#credentials
+		$data['username']   = "codejamer";
+		$data['apikey'] = "097b5f8c738a0bcfa8899ce0c7da3324a728c5921132e3b1c89065316fb00dae";
+		
 		$this->receive_new_sms($username, $apikey);
 	}
 	public function haha(){
