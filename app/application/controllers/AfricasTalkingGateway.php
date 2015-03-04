@@ -230,7 +230,7 @@ class AfricasTalkingGateway
   	
   	if(($responseObject = json_decode($this->_responseBody)) !== null) {
   	 	if($responseObject->Status == "Success")
-  		 	return $responseObject->NumQueued;
+  				return $responseObject->NumQueued;
   			throw new AfricasTalkingGatewayException($responseObject->ErrorMessage);
   		}
   		
