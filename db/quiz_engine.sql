@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 02, 2015 at 07:42 PM
+-- Generation Time: Mar 04, 2015 at 07:17 PM
 -- Server version: 5.5.41-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.6
 
@@ -76,6 +76,19 @@ CREATE TABLE IF NOT EXISTS `quest_answer` (
 
 INSERT INTO `quest_answer` (`quiz_id`, `question`, `answer`) VALUES
 (1, 'what is my name?', 'nerd');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `redemptions`
+--
+
+CREATE TABLE IF NOT EXISTS `redemptions` (
+  `redemption_id` int(11) NOT NULL AUTO_INCREMENT,
+  `codejam_code` varchar(255) NOT NULL,
+  `answer` varchar(255) NOT NULL,
+  PRIMARY KEY (`redemption_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
