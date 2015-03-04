@@ -1,6 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once('receive_sms.php');
+#require_once('receive_sms.php');
+
+#credentials
+$username   = "codejamer";
+$apikey     = "097b5f8c738a0bcfa8899ce0c7da3324a728c5921132e3b1c89065316fb00dae";
 
 class Quiz extends CI_Controller {
 
@@ -14,11 +18,65 @@ class Quiz extends CI_Controller {
 
 	public function index()
 	{
-		$this->haha();
+		$this->receive_new_sms($username, $apikey);
 	}
 	public function haha(){
 		echo 'It is working hahaha XD';
 	}
+
+
+	#@deebeat-> receive_sms(using the GateWay)(From the API)
+	public function receive_new_sms($username, $apikey)
+	{
+		$gateway  = new AfricaStalkingGateway($username, $apikey);
+		// Any gateway errors will be captured by our custom Exception class below, 
+		// so wrap the call in a try-catch block
+		try 
+		{
+		  // Our gateway will return 10 messages at a time back to you, starting with
+		  // what you currently believe is the lastReceivedId. Specify 0 for the first
+		  // time you access the gateway, and the ID of the last message we sent you
+		  // on subsequent received_results
+		  $lastReceivedId = 0;
+		  
+		  // Here is a sample of how to fetch all messages using a while loop
+		  do {
+		    
+		    $received_results = $gateway->fetchMessages($lastReceivedId);
+		    foreach($received_results as $result) {
+		      
+		      echo " From: " .$result->from;
+		      echo " To: " .$result->to;
+		      echo " Message: ".$result->text;
+		      echo " Date Sent: " .$result->date;
+		      echo " LinkId: " .$result->linkId;
+		      echo " id: ".$result->id;
+		      echo "\n";
+		      $lastReceivedId = $result->id;
+
+		      #@deebeat contribution
+		      $phone = $result->from;
+		      $date = $result->date;
+		      $msg = $result->text;
+
+		      #start querying the DB
+		      $this->recv_sms($phone, $msg, $date);
+
+		      
+		    }
+		  } while ( count($received_results) > 0 );
+		  
+		  // NOTE: Be sure to save lastReceivedId here for next time
+		  
+		}
+		catch ( AfricasTalkingGatewayException $e )
+		{
+		  echo "Encountered an error: ".$e->getMessage();
+		}
+	}
+	#end_receive_new_sms(x, y)->@deebeat
+
+
 
 	public function recv_sms($phone,$msg,$time){
 		#system access point
