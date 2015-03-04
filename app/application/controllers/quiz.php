@@ -1,5 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+require_once('receive_sms.php');
+
 class Quiz extends CI_Controller {
 
 	private $data;
