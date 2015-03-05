@@ -60,7 +60,6 @@ class Quiz extends CI_Controller {
 
 		      #start querying the DB
 		      $this->recv_sms($phone, $msg, $date);
-
 		      
 		    }
 		  } while ( count($received_results) > 0 );
@@ -74,9 +73,6 @@ class Quiz extends CI_Controller {
 		}
 	}
 	#end_receive_new_sms(x, y)->@deebeat
-
-
-
 
 	#@deebeat-> receive_sms(using the GateWay)(From the API)
 	public function receive_new_sms($username, $apikey)
@@ -191,5 +187,41 @@ class Quiz extends CI_Controller {
 			);
 		return $toSend;
 	}
+	public function prob_stats($phone){
+		#@shimanyi
+		#checks user status.
+
+		$result = $this->quiz_model->get_prob_stats($phone);
+		if ($result){
+			foreach ($result->result() as $row) {
+				$probationFlag = $row->probationFlag;
+			}
+		} else {
+			return false;
+		}	
+		return $probationFlag;
+	}	
+	public function to_probation($phone){
+		$probationFlag = $this->prob_stats($phone);
+
+		if($probationFlag == 3){
+			#put user on probation
+			if($this->quiz_model->to_probation($phone)){
+				return true;
+			} else { 
+				return false;
+			}
+
+		} else {
+			return false;
+		}
+	}
+	public function send_redemption_code(){
+
+	}
+	public function user_redeemed($phone){
+		#reset probation flag to 0
+	}
+
 }
 /* End of file quiz.php */

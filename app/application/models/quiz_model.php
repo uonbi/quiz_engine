@@ -118,4 +118,29 @@ class Quiz_model extends CI_Model {
 		$status = $this->db->insert('probation', $this->data);
 
 	}
+	public function get_prob_stats($phone){
+		$result = $this->db->getwhere('members', array('phone'=>$phone));
+
+		if($result){
+			return $result;
+		} else {
+			return false;
+		}
+	}
+	public function to_probation($phone){
+		$data = array(
+			'probation_status' => 1
+			);
+
+		$this->db->where('phone', $phone);
+		$result = $this->db->update('probation', $data);
+		if($result){
+			return true;
+		} else {
+			return false;
+		}	
+	}
+	public function send_redemption_code($phone){
+
+	}
 }
