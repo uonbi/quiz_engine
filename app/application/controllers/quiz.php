@@ -44,13 +44,13 @@ class Quiz extends CI_Controller {
 		    $received_results = $gateway->fetchMessages($lastReceivedId);
 		    foreach($received_results as $result) {
 		      
-		      echo " From: " .$result->from;
+		      /*echo " From: " .$result->from;
 		      echo " To: " .$result->to;
 		      echo " Message: ".$result->text;
 		      echo " Date Sent: " .$result->date;
 		      echo " LinkId: " .$result->linkId;
 		      echo " id: ".$result->id;
-		      echo "\n";
+		      echo "\n";*/
 		      $lastReceivedId = $result->id;
 
 		      #@deebeat contribution
@@ -72,6 +72,36 @@ class Quiz extends CI_Controller {
 		  echo "Encountered an error: ".$e->getMessage();
 		}
 	}
+
+	#send sms to a user
+	public function send_new_sms($recipient, $new_question, $username, $apikey)
+	{
+		#$recipient = "+254711XXXYYYZZZ,+254733XXXYYYZZZ";
+		// And of course we want our recipient to know what we really do
+		#$new_question = "I'm a lumberjack and its ok, I sleep all night and I work all day";
+		// Create a new instance of our awesome gateway class
+		$gateway = new AfricasTalkingGateway($username, $apikey);
+		// Any gateway errors will be captured by our custom Exception class below,
+		// so wrap the call in a try-catch block
+		try
+		{
+			// Thats it, hit send and we'll take care of the rest.
+			$results = $gateway->sendMessage($recipient, $new_question);
+			foreach($results as $result) {
+				// Note that only the Status "Success" means the message was sent
+				echo " Number: " .$result->number;
+				echo " Status: " .$result->status;
+				echo " MessageId: " .$result->messageId;
+				echo " Cost: " .$result->cost."\n";
+			}
+		}
+		catch ( AfricasTalkingGatewayException $e )
+		{
+			echo "Encountered an error while sending: ".$e->getMessage();
+		}
+		// DONE!!! 
+	}
+
 	#end_receive_new_sms(x, y)->@deebeat
 
 
