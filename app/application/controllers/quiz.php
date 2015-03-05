@@ -239,12 +239,16 @@ class Quiz extends CI_Controller {
 			return false;
 		}
 	}
-	public function send_redemption_code(){
-
-	}
 	public function user_redeemed($phone){
 		#reset probation flag to 0
-	}
+		$result = $this->quiz_model->probation_reset($phone);
+
+		if ($result){
+			return true;
+		} else {
+			return false;
+		}
+	}	
 
 }
 /* End of file quiz.php */

@@ -140,7 +140,20 @@ class Quiz_model extends CI_Model {
 			return false;
 		}	
 	}
-	public function send_redemption_code($phone){
+	public function get_redeemQue($phone){
 
+	}
+	public function probation_reset($phone){
+		$data = array(
+			'probation_status' = 0
+			);
+		$this->db->where('phone',$phone);
+		$result = $this->db->update('probation', $data);
+
+		if($result){
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
