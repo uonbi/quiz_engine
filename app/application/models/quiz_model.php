@@ -172,4 +172,28 @@ class Quiz_model extends CI_Model {
 			return false;
 		}
 	}
+	public function update_probation($phone, $red_que){
+		$data = array(
+			'redeem_quest' => $red_que
+			);
+
+		$this->db->where('phone', $phone);
+		$result = $this->db->update('probation', $data);
+
+		if($result){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public function redeem_module($var,$phone){
+		$result = $this->db->query("SELECT * FROM redemptions INNER JOIN probation ON probation.redeem_quest = redemptions.owner
+						WHERE redemptions.owner = $var AND probation.member_id = redemptions.member_id LIMIT 0 , 30");
+		if($result){
+			return true;
+		} else {
+			return false;
+		}
+
+	}
 }
