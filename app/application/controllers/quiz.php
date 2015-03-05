@@ -74,11 +74,16 @@ class Quiz extends CI_Controller {
 	}
 
 	#send sms to a user
-	public function send_new_sms($recipient, $new_question, $username, $apikey)
+	public function send_new_sms($recipient, $new_question)
 	{
 		#$recipient = "+254711XXXYYYZZZ,+254733XXXYYYZZZ";
 		// And of course we want our recipient to know what we really do
 		#$new_question = "I'm a lumberjack and its ok, I sleep all night and I work all day";
+
+		#credentials
+		$username   = "codejamer";
+		$apikey = "097b5f8c738a0bcfa8899ce0c7da3324a728c5921132e3b1c89065316fb00dae";
+
 		// Create a new instance of our awesome gateway class
 		$gateway = new AfricasTalkingGateway($username, $apikey);
 		// Any gateway errors will be captured by our custom Exception class below,
@@ -111,6 +116,16 @@ class Quiz extends CI_Controller {
 
 		if($this->_no_such_user($phone)){
 			$this->reg_user($phone,$msg,$time);
+
+			#@deebeat_edits
+			#send new user a question
+			$opener_question = $this->sendQue($phone);
+
+			#send using API helper function
+			$this->send_new_sms($phone, $opener_question);
+
+			#@deebeat->end();
+
 		} elseif ($this->_on_probation($phone)) {
 
 			#validate redemption ans
