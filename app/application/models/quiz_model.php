@@ -86,7 +86,6 @@ class Quiz_model extends CI_Model {
 			return false;
 		}
 	}
-
 	#end_@deebeat module's
 
 
@@ -150,9 +149,19 @@ class Quiz_model extends CI_Model {
 			return false;
 		}
 	}
+	public function on_probation($phone){
+
+		$result = $this->db->get_where('probation', array('phone' => $phone,'probation_status' => 1));
+		if($result){
+			return $result;
+		} else {
+			return false;
+		}
+	}
+
 	public function probation_reset($phone){
 		$data = array(
-			'probation_status' = 0
+			'probation_status' => 0
 			);
 		$this->db->where('phone',$phone);
 		$result = $this->db->update('probation', $data);
@@ -162,5 +171,29 @@ class Quiz_model extends CI_Model {
 		} else {
 			return false;
 		}
+	}
+	public function update_probation($phone, $red_que){
+		$data = array(
+			'redeem_quest' => $red_que
+			);
+
+		$this->db->where('phone', $phone);
+		$result = $this->db->update('probation', $data);
+
+		if($result){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public function redeem_module($var,$phone){
+		$result = $this->db->query("SELECT * FROM redemptions INNER JOIN probation ON probation.redeem_quest = redemptions.owner
+						WHERE redemptions.owner = $var AND probation.member_id = redemptions.member_id LIMIT 0 , 30");
+		if($result){
+			return true;
+		} else {
+			return false;
+		}
+
 	}
 }

@@ -107,8 +107,30 @@ class Quiz extends CI_Controller {
 
 	public function recv_sms($phone,$msg,$time){
 		#system access point
+		$msg = strtolower($msg);
+
 		if($this->_no_such_user($phone)){
 			$this->reg_user($phone,$msg,$time);
+		} elseif ($this->_on_probation($phone)) {
+
+			#validate redemption ans
+
+			$result = $this->redeem_validation($phone, $msg);
+			if($result){
+				#successfully redeemed his|herself
+				$next_que = $this->sendQue($phone);
+
+				#@Dennis send this next quetion to the user
+
+			} else {
+				#user failed the redemption question
+				$red_que = $this->redeemQue();
+				$this->quiz_model->update_probation($phone, $red_que);
+
+				$msg = $this->redeem_message($red_que);
+				#Dennis pick the message to send here.
+			}
+
 		} else {
 			#answer validations
 			$result = $this->quiz_model->validate($phone, $msg, $time);
@@ -123,7 +145,19 @@ class Quiz extends CI_Controller {
 
 			} else {
 				#wrong answer was submitted
-				$this->sendQue($phone);
+				if($this->to_probation($phone) == false){
+					$this->sendQue($phone);
+				} else {
+
+					#notify user he is on probation and send him a redemption question
+					$red_que = $this->redeemQue();
+					#update probation table with the users question
+					$this->quiz_model->update_probation($phone, $red_que);
+
+					$msg = $this->redeem_message($red_que);
+					#Dennis pick the message to send here.
+
+				}
 			}
 		}
 	}
@@ -182,7 +216,7 @@ class Quiz extends CI_Controller {
 	public function to_probation($phone){
 		$probationFlag = $this->prob_stats($phone);
 
-		if($probationFlag == 3){
+		if($probationFlag =< 3){
 			#put user on probation
 			if($this->quiz_model->to_probation($phone)){
 				return true;
@@ -211,7 +245,7 @@ class Quiz extends CI_Controller {
 			}
 
 			$random_que = array_rand($owners,1);
-			return $question;
+			return $random_que;
 
 		} else {
 			return false;
@@ -226,7 +260,29 @@ class Quiz extends CI_Controller {
 		} else {
 			return false;
 		}
+	}
+	public function _on_probation($phone){
+		$result = $this->quiz_model->on_probation($phone);
+
+		if($result->num_rows() == 1){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public function redeem_message($code_owner){
+		$redeem_msg = 'You on probation. Submit the '+$code_owner+' from their stand to reedem yourself';
+		return $redeem_msg;
 	}	
+	public function redeem_module($var){
+		$result = $this->quiz_model->redeem_module($var);
+
+		if($result){
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 }
 /* End of file quiz.php */
