@@ -141,7 +141,14 @@ class Quiz_model extends CI_Model {
 		}	
 	}
 	public function get_redeemQue($phone){
+		$this->db->select('owner');
+		$result = $this->db->get('redemptions');
 
+		if ($result){
+			return true;
+		} else {
+			return false;
+		}
 	}
 	public function probation_reset($phone){
 		$data = array(
