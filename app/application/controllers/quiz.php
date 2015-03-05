@@ -40,10 +40,10 @@ class Quiz extends CI_Controller {
 			}
 		}
 	}
-	public function reg_user($phone, $name){
+	public function reg_user($phone, $name,$time){
 		$data['phone'] =  $phone;
 		$data['name']  =  $name;
-		$data['time']  =  date('y-m-d h:m:s');
+		$data['time']  =  $time;
 		$data['quiz_count'] = 1;
 
 		$this->quiz_model->reg_user($data);	
