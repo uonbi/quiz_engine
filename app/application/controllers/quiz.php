@@ -12,7 +12,6 @@ class Quiz extends CI_Controller {
 		parent::__construct();
 
 		$this->load->model('quiz_model');
-		
 	}
 
 	public function index()
@@ -219,11 +218,7 @@ class Quiz extends CI_Controller {
 		$user_count = $this->userCount($phone);
 		$que = $this->getQuestion($user_count);
 
-		$toSend = array(
-			'phone'   => $phone,
-			'message' => $que
-			);
-		return $toSend;
+		return $que;
 	}
 	public function prob_stats($phone){
 		#@shimanyi
