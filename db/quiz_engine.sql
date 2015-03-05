@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 05, 2015 at 03:50 PM
+-- Generation Time: Mar 05, 2015 at 04:37 PM
 -- Server version: 5.5.41-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.6
 
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `probation` (
 --
 
 INSERT INTO `probation` (`probation_id`, `member_id`, `date_time`, `redeem_quest`, `probation_status`) VALUES
-(1, 1, '2015-03-05 10:36:08', 'Google', 0);
+(1, 1, '2015-03-05 10:36:08', 'google', 0);
 
 -- --------------------------------------------------------
 
@@ -77,14 +77,16 @@ CREATE TABLE IF NOT EXISTS `quest_answer` (
   `question` varchar(160) NOT NULL,
   `answer` varchar(50) NOT NULL,
   PRIMARY KEY (`quiz_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `quest_answer`
 --
 
 INSERT INTO `quest_answer` (`quiz_id`, `question`, `answer`) VALUES
-(1, 'what is my name?', 'nerd');
+(1, 'what is my name?', 'nerd'),
+(2, 'What is the first name of Facebook founder?', 'mark'),
+(3, 'What is the second name of the Kenyan President?', 'muigai');
 
 -- --------------------------------------------------------
 
@@ -105,8 +107,8 @@ CREATE TABLE IF NOT EXISTS `redemptions` (
 --
 
 INSERT INTO `redemptions` (`redemption_id`, `codejam_code`, `owner`, `member_id`) VALUES
-(1, 'codejam17', 'Google', 1),
-(2, 'codejam01', 'SCICodeJam', 1);
+(1, 'codejam17', 'google', 1),
+(2, 'codejam01', 'scicodejam', 1);
 
 -- --------------------------------------------------------
 
