@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 05, 2015 at 11:45 AM
+-- Generation Time: Mar 05, 2015 at 03:50 PM
 -- Server version: 5.5.41-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.6
 
@@ -53,6 +53,7 @@ CREATE TABLE IF NOT EXISTS `probation` (
   `probation_id` int(10) NOT NULL AUTO_INCREMENT,
   `member_id` int(10) NOT NULL,
   `date_time` datetime NOT NULL,
+  `redeem_quest` varchar(255) NOT NULL,
   `probation_status` int(11) NOT NULL COMMENT 'locked=1,unlock=0',
   PRIMARY KEY (`probation_id`),
   KEY `member_id` (`member_id`)
@@ -62,8 +63,8 @@ CREATE TABLE IF NOT EXISTS `probation` (
 -- Dumping data for table `probation`
 --
 
-INSERT INTO `probation` (`probation_id`, `member_id`, `date_time`, `probation_status`) VALUES
-(1, 1, '2015-03-05 10:36:08', 0);
+INSERT INTO `probation` (`probation_id`, `member_id`, `date_time`, `redeem_quest`, `probation_status`) VALUES
+(1, 1, '2015-03-05 10:36:08', 'Google', 0);
 
 -- --------------------------------------------------------
 
@@ -95,6 +96,7 @@ CREATE TABLE IF NOT EXISTS `redemptions` (
   `redemption_id` int(11) NOT NULL AUTO_INCREMENT,
   `codejam_code` varchar(255) NOT NULL,
   `owner` varchar(255) NOT NULL,
+  `member_id` int(11) NOT NULL,
   PRIMARY KEY (`redemption_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
@@ -102,9 +104,9 @@ CREATE TABLE IF NOT EXISTS `redemptions` (
 -- Dumping data for table `redemptions`
 --
 
-INSERT INTO `redemptions` (`redemption_id`, `codejam_code`, `owner`) VALUES
-(1, 'codejam17', 'Google'),
-(2, 'codejam01', 'SCICodeJam');
+INSERT INTO `redemptions` (`redemption_id`, `codejam_code`, `owner`, `member_id`) VALUES
+(1, 'codejam17', 'Google', 1),
+(2, 'codejam01', 'SCICodeJam', 1);
 
 -- --------------------------------------------------------
 
