@@ -136,6 +136,7 @@ class Quiz extends CI_Controller {
 				$next_que = $this->sendQue($phone);
 
 				#@Dennis send this next quetion to the user
+				$this->send_new_sms($phone, $next_que);
 
 			} else {
 				#user failed the redemption question
@@ -144,6 +145,7 @@ class Quiz extends CI_Controller {
 
 				$msg = $this->redeem_message($red_que);
 				#Dennis pick the message to send here.
+				$this->send_new_sms($phone, $msg);
 			}
 
 		} else {
@@ -153,7 +155,10 @@ class Quiz extends CI_Controller {
 				#update quiz_count in the db
 				$res = $this->quiz_model->update_usr($phone);
 				if($res){
-					$this->sendQue($phone);
+					$new_quest = $this->sendQue($phone);
+
+					#@deebeat
+					$this->send_new_sms($phone, $new_quest);
 				} else {
 					#only magic can get you here XD
 				}	
@@ -161,7 +166,10 @@ class Quiz extends CI_Controller {
 			} else {
 				#wrong answer was submitted
 				if($this->to_probation($phone) == false){
-					$this->sendQue($phone);
+					$same_question = $this->sendQue($phone);
+
+					#@deebeat
+					$this->send_new_sms($phone, $same_question);
 				} else {
 
 					#notify user he is on probation and send him a redemption question
@@ -171,6 +179,9 @@ class Quiz extends CI_Controller {
 
 					$msg = $this->redeem_message($red_que);
 					#Dennis pick the message to send here.
+
+					#@deebeat
+					$this->send_new_sms($phone, $msg);
 
 				}
 			}
