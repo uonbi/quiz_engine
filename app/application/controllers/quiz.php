@@ -237,7 +237,7 @@ class Quiz extends CI_Controller {
 	public function to_probation($phone){
 		$probationFlag = $this->prob_stats($phone);
 
-		if($probationFlag =< 3){
+		if($probationFlag <= 3){
 			#put user on probation
 			if($this->quiz_model->to_probation($phone)){
 				return true;
