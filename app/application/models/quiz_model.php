@@ -86,7 +86,6 @@ class Quiz_model extends CI_Model {
 			return false;
 		}
 	}
-
 	#end_@deebeat module's
 
 
