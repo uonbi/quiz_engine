@@ -149,6 +149,16 @@ class Quiz_model extends CI_Model {
 			return false;
 		}
 	}
+	public function on_probation($phone){
+
+		$result = $this->db->get_where('probation', array('phone' => $phone,'probation_status' => 1));
+		if($result){
+			return $result;
+		} else {
+			return false;
+		}
+	}
+
 	public function probation_reset($phone){
 		$data = array(
 			'probation_status' => 0

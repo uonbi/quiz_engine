@@ -79,6 +79,19 @@ class Quiz extends CI_Controller {
 		#system access point
 		if($this->_no_such_user($phone)){
 			$this->reg_user($phone,$msg,$time);
+		} elseif ($this->_on_probation($phone)) {
+			/*
+			- take ans and compare with the code in the db
+			if correct redeem the guy 
+			else 
+			Send notify him that he is still on probation and he needs to give the codejam code of
+			eg Google to proceed.
+			*/
+
+			#@Dennis - system to sent probation message
+
+
+
 		} else {
 			#answer validations
 			$result = $this->quiz_model->validate($phone, $msg, $time);
@@ -192,6 +205,15 @@ class Quiz extends CI_Controller {
 		$result = $this->quiz_model->probation_reset($phone);
 
 		if ($result){
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public function _on_probation($phone){
+		$result = $this->quiz_model->on_probation($phone);
+
+		if($result->num_rows() == 1){
 			return true;
 		} else {
 			return false;
