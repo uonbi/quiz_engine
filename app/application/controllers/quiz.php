@@ -216,6 +216,29 @@ class Quiz extends CI_Controller {
 			return false;
 		}
 	}
+	public function redeemQue(){
+		/*
+			@Shimanyi
+			make the companies generated random in the system.
+
+		*/
+		$index = 0;
+		$owners = array();
+
+		$result = $this->quiz_model->get_redeemQue();
+		if ($result){
+			foreach ($result->result() as $row) {
+				$owners[$index] = $row->owner;
+				$index += 1;
+			}
+
+			$random_que = array_rand($owners,1);
+			return $question;
+
+		} else {
+			return false;
+		}
+	}
 	public function send_redemption_code(){
 
 	}
