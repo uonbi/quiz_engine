@@ -22,9 +22,9 @@ class Quiz extends CI_Controller {
 
 
 		#form user
-		$phone_number = $_POST['from'];
-		$to = $_POST['to'];//shot code(sender)
-		$message_from_user = trim(strtolower($_POST['text']));
+		$phone_number = @$_POST['from'];
+		$to = @$_POST['to'];//shot code(sender)
+		$message_from_user = trim(strtolower(@$_POST['text']));
 
 		if (substr($message_from_user, 0, 4) == "aht " )
 		{
