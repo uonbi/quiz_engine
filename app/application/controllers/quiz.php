@@ -42,7 +42,7 @@ class Quiz extends CI_Controller {
 			$this->send_new_sms($phone_number, $welcome_message, $sender);
 
 			#send the user a question
-			$this->receive_user_msg($phone_number, $succeeding_msg, $current_date_time);
+			#$this->receive_user_msg($phone_number, $succeeding_msg, $current_date_time);
 		}
 
 		
