@@ -106,10 +106,12 @@ class Quiz extends CI_Controller {
 		try
 		{
 			// Thats it, hit send and we'll take care of the rest.
-			var_dump($recipient, $new_question, $sender);
-			exit();
 			
 			$results = $gateway->sendMessage($recipient, $new_question, $sender);
+
+				var_dump(print_r($results,true));
+				exit();
+
 			//echo $apikey;
 			foreach($results as $result) {
 				// Note that only the Status "Success" means the message was sent
