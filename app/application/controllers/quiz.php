@@ -26,10 +26,6 @@ class Quiz extends CI_Controller {
 		$to = $_REQUEST['to'];//shot code(sender)
 		$message_from_user = trim(strtolower($_REQUEST['text']));
 
-		var_dump($username,$phone_number,$to,$message_from_user);
-		exit();
-
-		echo $phone_number;
 
 		//if (substr($message_from_user, 0, 4) == "aht " )
 		//{
@@ -110,6 +106,9 @@ class Quiz extends CI_Controller {
 		try
 		{
 			// Thats it, hit send and we'll take care of the rest.
+			var_dump($recipient, $new_question, $sender);
+			exit();
+			
 			$results = $gateway->sendMessage($recipient, $new_question, $sender);
 			//echo $apikey;
 			foreach($results as $result) {
