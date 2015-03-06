@@ -22,18 +22,18 @@ class Quiz extends CI_Controller {
 
 
 		#form user
-		$phone_number = @$_REQUEST['from'];
-		$to = @$_REQUEST['to'];//shot code(sender)
-		$message_from_user = trim(strtolower(@$_REQUEST['text']));
+		$phone_number = $_REQUEST['from'];
+		$to = $_REQUEST['to'];//shot code(sender)
+		$message_from_user = trim(strtolower($_REQUEST['text']));
 
 		echo $phone_number;
 
-		if (substr($message_from_user, 0, 4) == "aht " )
-		{
+		//if (substr($message_from_user, 0, 4) == "aht " )
+		//{
 			$message_from_user = trim(substr($message_from_user, 4));
 
-			$this->send_new_sms("+".$phone_number, $message_from_user, $to);
-		}
+			$this->send_new_sms("+254725332343", "Hello there", "22548");
+		//}
 
 		
 		#$this->receive_new_sms($username, $apikey);
@@ -97,16 +97,18 @@ class Quiz extends CI_Controller {
 
 		#credentials
 		$username   = "codejamer";
-		$apikey = "097b5f8c738a0bcfa8899ce0c7da3324a728c5921132e3b1c89065316fb00dae";
+		$apikey = "097b5f8c738a0bcfa8899ce0c7da3324a728c5921132e3b1c89065316fb00da";
 
 		// Create a new instance of our awesome gateway class
 		$gateway = new AfricasTalkingGateway($username, $apikey);
 		// Any gateway errors will be captured by our custom Exception class below,
 		// so wrap the call in a try-catch block
+		
 		try
 		{
 			// Thats it, hit send and we'll take care of the rest.
-			$results = $gateway->sendMessage($recipient, $new_question, $sender);
+			$results = $gateway->sendMessage($recipient, $new_question, $sender, 1);
+			echo $apikey;
 			foreach($results as $result) {
 				// Note that only the Status "Success" means the message was sent
 				/*echo " Number: " .$result->number;
