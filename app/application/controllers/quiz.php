@@ -21,20 +21,24 @@ class Quiz extends CI_Controller {
 		$apikey = "097b5f8c738a0bcfa8899ce0c7da3324a728c5921132e3b1c89065316fb00dae";
 
 
-		#form user
-
+		#details from the user
 		$phone_number = $_POST['from'];
 		$sender = $_POST['to'];//shot code(sender)
 		$message_from_user = trim(strtolower($_POST['text']));
 
-		if (substr($message_from_user, 0, 5) == "hunt " )
+		$message_from_user = substr($message_from_user, 0, 5)
+
+		if ($message_from_user == "hunt ")
 		{
-			$name = trim(substr($message_from_user, 5));
-			$welcome_message = "Hey, ".ucfirst($name)."{".$phone_number."}, Welcome to the Amazing Treasure Hunt:). Chill man, we are debugging!";
+
+			#check db if the user already exists
+			#$this->quiz_model
+
+			#Welcome user and request their name
+			$welcome_message = "Welcome to the Amazing Treasure Hunt:). Please reply with your name before we begin the hunt.\n{Powered by: Angani, Africa's Talking and SCI CodeJam}";
 
 			$this->send_new_sms($phone_number, $welcome_message, $sender);
 		}
-
 
 		
 		#$this->receive_new_sms($username, $apikey);
@@ -98,7 +102,7 @@ class Quiz extends CI_Controller {
 
 		#credentials
 		$username   = "codejamer";
-		$apikey = "097b5f8c738a0bcfa8899ce0c7da3324a728c5921132e3b1c89065316fb00da";
+		$apikey = "097b5f8c738a0bcfa8899ce0c7da3324a728c5921132e3b1c89065316fb00dae";
 
 		// Create a new instance of our awesome gateway class
 		$gateway = new AfricasTalkingGateway($username, $apikey);
@@ -108,15 +112,18 @@ class Quiz extends CI_Controller {
 		try
 		{
 			// Thats it, hit send and we'll take care of the rest.
+			
 
 			$results = $gateway->sendMessage($recipient, $new_question, $sender);
 				
+				//var_dump(print_r($results,true));
+				//exit();
+
+			//echo $apikey;
 			foreach($results as $result) {
 				// Note that only the Status "Success" means the message was sent
 				echo " Number: " .$result->number;
 				echo " Status: " .$result->status;
-				echo " MessageId: ".$result->messageId;
-				echo " Cost: " .$result->cost."\n";
 				echo " MessageId: " .$result->messageId;
 				echo " Cost: " .$result->cost."\n";
 			}
