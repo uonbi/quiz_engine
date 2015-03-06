@@ -22,17 +22,18 @@ class Quiz extends CI_Controller {
 
 
 		#form user
-		$phone_number = $_REQUEST['from'];
-		$to = $_REQUEST['to'];//shot code(sender)
-		$message_from_user = trim(strtolower($_REQUEST['text']));
+		$phone_number = $_POST['from'];
+		$sender = $_POST['to'];//shot code(sender)
+		$message_from_user = trim(strtolower($_POST['text']));
 
 
-		//if (substr($message_from_user, 0, 4) == "aht " )
-		//{
+		if (substr($message_from_user, 0, 4) == "aht " )
+		{
 			$message_from_user = trim(substr($message_from_user, 4));
+			$welcome_message = "Hey, welcome to the challange!!";
 
-			$this->send_new_sms("+254725332343", "Hello there", "22548");
-		//}
+			$this->send_new_sms($phone_number, $welcome_message, $sender);
+		}
 
 		
 		#$this->receive_new_sms($username, $apikey);
