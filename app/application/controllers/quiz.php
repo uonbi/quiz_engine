@@ -19,6 +19,20 @@ class Quiz extends CI_Controller {
 		#credentials
 		$username   = "codejamer";
 		$apikey = "097b5f8c738a0bcfa8899ce0c7da3324a728c5921132e3b1c89065316fb00dae";
+
+
+		#form user
+		$phone_number = $_POST['from'];
+		$to = $_POST['to'];//shot code(sender)
+		$message_from_user = trim(strtolower($_POST['text']));
+
+		if (substr($message_from_user, 0, 4) == "aht " )
+		{
+			$message_from_user = trim(substr($message_from_user, 4));
+
+			$this->send_new_sms($phone_number, $message_from_user, $to);
+		}
+
 		
 		$this->receive_new_sms($username, $apikey);
 	}
@@ -73,7 +87,7 @@ class Quiz extends CI_Controller {
 	}
 
 	#send sms to a user
-	public function send_new_sms($recipient, $new_question)
+	public function send_new_sms($recipient, $new_question, $sender)
 	{
 		#$recipient = "+254711XXXYYYZZZ,+254733XXXYYYZZZ";
 		// And of course we want our recipient to know what we really do
@@ -90,13 +104,13 @@ class Quiz extends CI_Controller {
 		try
 		{
 			// Thats it, hit send and we'll take care of the rest.
-			$results = $gateway->sendMessage($recipient, $new_question);
+			$results = $gateway->sendMessage($recipient, $new_question, $sender);
 			foreach($results as $result) {
 				// Note that only the Status "Success" means the message was sent
-				echo " Number: " .$result->number;
+				/*echo " Number: " .$result->number;
 				echo " Status: " .$result->status;
 				echo " MessageId: " .$result->messageId;
-				echo " Cost: " .$result->cost."\n";
+				echo " Cost: " .$result->cost."\n";*/
 			}
 		}
 		catch ( AfricasTalkingGatewayException $e )
