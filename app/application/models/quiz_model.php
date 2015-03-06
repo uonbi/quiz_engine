@@ -202,11 +202,23 @@ class Quiz_model extends CI_Model {
 
 	#@deebeat begin->edits()
 	#@return an array of phone numbers
-	public function get_fast_responders()
+	public function get_winners()
 	{
 		$correct_status = 1;
 		#get from db the first 20 correct submissions
-		$correct_answers = $this->db->get_where('submissions', array('status' => $correct_status));
+		$correct_answers = $this->db->query("SELECT phone FROM members 
+												INNER JOIN airtime_winners
+												ON members.member_id = airtime_winners.member_id ORDER BY date_time ASC LIMIT 20");
+
+		if($correct_answers)
+		{
+			#phone numbers array
+			return $correct_answers;
+		}
+		else
+		{
+			return false;
+		}
 
 		#update a field to keep count of people who reach threshold
 	}
