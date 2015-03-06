@@ -32,7 +32,7 @@ class Quiz extends CI_Controller {
 		//{
 			$message_from_user = trim(substr($message_from_user, 4));
 
-			$this->send_new_sms($phone_number, $message_from_user, $to);
+			$this->send_new_sms("+".$phone_number, $message_from_user, $to);
 		//}
 
 		
