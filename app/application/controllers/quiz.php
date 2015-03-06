@@ -35,14 +35,7 @@ class Quiz extends CI_Controller {
 
 			#check db if the user already exists
 			#$this->quiz_model
-
-			#Welcome user and request their name
-			$welcome_message = "Welcome to the Amazing Treasure Hunt:). Please reply with your name before we begin the hunt.\n{Powered by: Angani, Africa's Talking and SCI CodeJam}";
-
-			$this->send_new_sms($phone_number, $welcome_message, $sender);
-
-			#send the user a question
-			#$this->receive_user_msg($phone_number, $succeeding_msg, $current_date_time, $sender);
+			$this->receive_user_msg($phone_number, $succeeding_msg, $current_date_time, $sender);
 		}
 
 	}
@@ -51,9 +44,6 @@ class Quiz extends CI_Controller {
 	#send sms to a user
 	public function send_new_sms($recipient, $new_question, $sender)
 	{
-		#$recipient = "+254711XXXYYYZZZ,+254733XXXYYYZZZ";
-		// And of course we want our recipient to know what we really do
-		#$new_question = "I'm a lumberjack and its ok, I sleep all night and I work all day";
 
 		#credentials
 		$username   = "codejamer";
@@ -71,17 +61,6 @@ class Quiz extends CI_Controller {
 
 			$results = $gateway->sendMessage($recipient, $new_question, $sender);
 				
-				//var_dump(print_r($results,true));
-				//exit();
-
-			//echo $apikey;
-			/*foreach($results as $result) {
-				// Note that only the Status "Success" means the message was sent
-				echo " Number: " .$result->number;
-				echo " Status: " .$result->status;
-				echo " MessageId: " .$result->messageId;
-				echo " Cost: " .$result->cost."\n";
-			}*/
 		}
 		catch ( AfricasTalkingGatewayException $e )
 		{
@@ -98,6 +77,9 @@ class Quiz extends CI_Controller {
 
 		if($this->_no_such_user($phone)){
 			$this->reg_user($phone, $msg, $time);
+
+			$welcome_message = "Welcome to the Amazing Treasure Hunt:). Please reply with your name before we begin the hunt.\n{Powered by: Angani, Africa's Talking and SCI CodeJam}";
+			$this->send_new_sms($phone, $welcome_message, $sender);
 
 			#@deebeat_edits
 			#send new user a question
