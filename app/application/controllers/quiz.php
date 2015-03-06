@@ -37,7 +37,7 @@ class Quiz extends CI_Controller {
 			#$this->quiz_model
 
 			#Welcome user and request their name
-			$welcome_message = "Welcome to the Amazing Treasure Hunt:). Please reply with your name before we begin the hunt.\n{Powered by: Angani, Africa's Talking and SCI CodeJam}";
+			$welcome_message = "Welcome to the Amazing Treasure Hunt:). Please reply with your name before we begin the hunt.\n\nPowered by: SCI CodeJam";
 
 			$this->send_new_sms($phone_number, $welcome_message, $sender);
 
@@ -298,7 +298,7 @@ class Quiz extends CI_Controller {
 	public function award_airtime()
 	{
 		#array of phone numbers
-		$awardees = $this->quiz_model->get_fast_responders();
+		$awardees = $this->quiz_model->get_winners();
 	}
 
 }

@@ -3,8 +3,8 @@
 	require_once "AfricasTalkingGateway.php";
 
 //Specify your credentials
-		$username = "myAfricasTalkingUsername";
-		$apiKey   = "myAfricasTalkingAPIKey";
+		$username = "codejamer";
+		$apiKey   = "097b5f8c738a0bcfa8899ce0c7da3324a728c5921132e3b1c89065316fb00dae";
 		
 		//Specify the phone number/s and amount in the format shown
 		//Example shown assumes we want to send KES 100 to two numbers
