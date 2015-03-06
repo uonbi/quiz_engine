@@ -42,7 +42,7 @@ class Quiz extends CI_Controller {
 			$this->send_new_sms($phone_number, $welcome_message, $sender);
 
 			#send the user a question
-			$this->receive_user_msg($phone_number, $succeeding_msg, $current_date_time);
+			#$this->receive_user_msg($phone_number, $succeeding_msg, $current_date_time, $sender);
 		}
 
 	}
@@ -92,7 +92,7 @@ class Quiz extends CI_Controller {
 
 	#end_receive_new_sms(x, y)->@deebeat
 
-	public function receive_user_msg($phone, $msg, $time){
+	public function receive_user_msg($phone, $msg, $time, $sender){
 		#system access point
 		$msg = trim(strtolower($msg));
 
@@ -104,7 +104,7 @@ class Quiz extends CI_Controller {
 			$opener_question = $this->sendQue($phone);
 
 			#send using API helper function
-			$this->send_new_sms($phone, $opener_question);
+			$this->send_new_sms($phone, $opener_question, $sender);
 
 			#@deebeat->end();
 
@@ -118,7 +118,7 @@ class Quiz extends CI_Controller {
 				$next_que = $this->sendQue($phone);
 
 				#@Dennis send this next quetion to the user
-				$this->send_new_sms($phone, $next_que);
+				$this->send_new_sms($phone, $next_que, $sender);
 
 			} else {
 				#user failed the redemption question
@@ -127,7 +127,7 @@ class Quiz extends CI_Controller {
 
 				$msg = $this->redeem_message($red_que);
 				#Dennis pick the message to send here.
-				$this->send_new_sms($phone, $msg);
+				$this->send_new_sms($phone, $msg, $sender);
 			}
 
 		} else {
@@ -140,7 +140,7 @@ class Quiz extends CI_Controller {
 					$new_quest = $this->sendQue($phone);
 
 					#@deebeat-send user a new question
-					$this->send_new_sms($phone, $new_quest);
+					$this->send_new_sms($phone, $new_quest, $sender);
 
 					#update submission table
 					$this->db->update();
@@ -154,7 +154,7 @@ class Quiz extends CI_Controller {
 					$same_question = $this->sendQue($phone);
 
 					#@deebeat
-					$this->send_new_sms($phone, $same_question);
+					$this->send_new_sms($phone, $same_question, $sender);
 				} else {
 
 					#notify user he is on probation and send him a redemption question
@@ -166,7 +166,7 @@ class Quiz extends CI_Controller {
 					#Dennis pick the message to send here.
 
 					#@deebeat
-					$this->send_new_sms($phone, $msg);
+					$this->send_new_sms($phone, $msg, $sender);
 
 				}
 			}
