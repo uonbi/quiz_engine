@@ -7,7 +7,9 @@ class Quiz_model extends CI_Model {
 		$status = $this->db->insert('members', $data);
 		if($status){
 			return true;
-		} else {}
+		} else {
+			return false;
+		}
 	}
 	public function is_available($phone){
 		$query = $this->db->get_where('members', array('phone' => $phone));
