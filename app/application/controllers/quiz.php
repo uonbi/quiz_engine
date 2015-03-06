@@ -2,7 +2,7 @@
 
 #helper gateway class
 require_once('AfricasTalkingGateway.php');
-error_reporting(1);
+error_reporting(E_ALL);
 
 class Quiz extends CI_Controller {
 
@@ -25,6 +25,9 @@ class Quiz extends CI_Controller {
 		$phone_number = $_REQUEST['from'];
 		$to = $_REQUEST['to'];//shot code(sender)
 		$message_from_user = trim(strtolower($_REQUEST['text']));
+
+		var_dump($username,$phone_number,$to,$message_from_user);
+		exit();
 
 		echo $phone_number;
 
@@ -107,8 +110,8 @@ class Quiz extends CI_Controller {
 		try
 		{
 			// Thats it, hit send and we'll take care of the rest.
-			$results = $gateway->sendMessage($recipient, $new_question, $sender, 1);
-			echo $apikey;
+			$results = $gateway->sendMessage($recipient, $new_question, $sender);
+			//echo $apikey;
 			foreach($results as $result) {
 				// Note that only the Status "Success" means the message was sent
 				/*echo " Number: " .$result->number;
