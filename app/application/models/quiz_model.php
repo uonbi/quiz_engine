@@ -6,6 +6,7 @@ class Quiz_model extends CI_Model {
 	public function reg_user($data){
 		$status = $this->db->insert('members', $data);
 		if($status){
+			#insert the same user to the probation table
 			return true;
 		} else {
 			return false;
@@ -130,20 +131,34 @@ class Quiz_model extends CI_Model {
 			return false;
 		}
 	}
+	public function prob_stats_update($phone,$var){
+		$data = array(
+			'probationFlag' => $var
+			);
+		
+		$this->db->where('phone',$phone);
+		$result = $this->db->update('members', $data);
+
+		if($result){
+			return true;
+		} else {
+			return false;
+		}
+	}
 	public function to_probation($phone){
 		$data = array(
 			'probation_status' => 1
 			);
 
 		$this->db->where('phone', $phone);
-		$result = $this->db->update('probation', $data);
+		$result = $this->db->update('members', $data);
 		if($result){
 			return true;
 		} else {
 			return false;
 		}	
 	}
-	public function get_redeemQue($phone){
+	public function get_redeemQue(){
 		$this->db->select('owner');
 		$result = $this->db->get('redemptions');
 
@@ -155,7 +170,7 @@ class Quiz_model extends CI_Model {
 	}
 	public function on_probation($phone){
 
-		$result = $this->db->get_where('probation', array('phone' => $phone,'probation_status' => 1));
+		$result = $this->db->get_where('members', array('phone' => $phone,'probation_status' => 1));
 		if($result){
 			return $result;
 		} else {
