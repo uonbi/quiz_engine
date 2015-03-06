@@ -24,18 +24,18 @@ class Quiz extends CI_Controller {
 		#details from the user
 		$phone_number = $this->input->post('from');
 		$sender = $this->input->post('to');//shot code(sender)
-		$message_from_user = trim(strtolower($this->input->post('text')));
+		$user_message = trim(strtolower($this->input->post('text')));
 
-		$message_from_user = substr($message_from_user, 0, 5);
+		$message_from_user = substr($user_message, 0, 5);
 		$succeeding_msg = substr($message_from_user, 6);
+
 		$current_date_time = date("Y-m-d H:i:s");
 
 		if ($message_from_user == "hunt ")
 		{
-
-			#check db if the user already exists
-			#$this->quiz_model
 			$this->receive_user_msg($phone_number, $succeeding_msg, $current_date_time, $sender);
+			echo 'amazing';
+			die();
 		}
 
 	}
@@ -78,8 +78,8 @@ class Quiz extends CI_Controller {
 		if($this->_no_such_user($phone)){
 			$this->reg_user($phone, $msg, $time);
 
-			$welcome_message = "Welcome to the Amazing Treasure Hunt:). Please reply with your name before we begin the hunt.\n{Powered by: Angani, Africa's Talking and SCI CodeJam}";
-			$this->send_new_sms($phone, $welcome_message, $sender);
+			/*$welcome_message = "Welcome to the Amazing Treasure Hunt:). Please reply with your name before we begin the hunt.\n{Powered by: Angani, Africa's Talking and SCI CodeJam}";
+			$this->send_new_sms($phone, $welcome_message, $sender);*/
 
 			#@deebeat_edits
 			#send new user a question
