@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 05, 2015 at 04:37 PM
+-- Generation Time: Mar 06, 2015 at 10:27 PM
 -- Server version: 5.5.41-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.6
 
@@ -23,6 +23,20 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `airtime_winners`
+--
+
+CREATE TABLE IF NOT EXISTS `airtime_winners` (
+  `entry_id` int(10) NOT NULL AUTO_INCREMENT,
+  `member_id` int(10) NOT NULL,
+  `date_time` datetime NOT NULL,
+  PRIMARY KEY (`entry_id`),
+  KEY `member_id` (`member_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Stores entries of users who get the first five questions correct' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `members`
 --
 
@@ -32,6 +46,7 @@ CREATE TABLE IF NOT EXISTS `members` (
   `phone` varchar(20) NOT NULL,
   `quiz_count` int(1) NOT NULL DEFAULT '0',
   `probationFlag` int(11) NOT NULL,
+  `time` datetime NOT NULL,
   PRIMARY KEY (`member_id`),
   UNIQUE KEY `phone_number` (`phone`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
@@ -40,8 +55,8 @@ CREATE TABLE IF NOT EXISTS `members` (
 -- Dumping data for table `members`
 --
 
-INSERT INTO `members` (`member_id`, `name`, `phone`, `quiz_count`, `probationFlag`) VALUES
-(1, 'test', '+254720255774', 1, 0);
+INSERT INTO `members` (`member_id`, `name`, `phone`, `quiz_count`, `probationFlag`, `time`) VALUES
+(1, '', '+254720255774', 1, 0, '2015-03-06 22:02:14');
 
 -- --------------------------------------------------------
 
@@ -57,14 +72,7 @@ CREATE TABLE IF NOT EXISTS `probation` (
   `probation_status` int(11) NOT NULL COMMENT 'locked=1,unlock=0',
   PRIMARY KEY (`probation_id`),
   KEY `member_id` (`member_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
-
---
--- Dumping data for table `probation`
---
-
-INSERT INTO `probation` (`probation_id`, `member_id`, `date_time`, `redeem_quest`, `probation_status`) VALUES
-(1, 1, '2015-03-05 10:36:08', 'google', 0);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -110,40 +118,21 @@ INSERT INTO `redemptions` (`redemption_id`, `codejam_code`, `owner`, `member_id`
 (1, 'codejam17', 'google', 1),
 (2, 'codejam01', 'scicodejam', 1);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `submissions`
---
-
-CREATE TABLE IF NOT EXISTS `submissions` (
-  `submission_id` int(10) NOT NULL AUTO_INCREMENT,
-  `member_id` int(10) NOT NULL,
-  `quiz_id` int(10) NOT NULL,
-  `answer` varchar(255) NOT NULL,
-  `submission_date` datetime NOT NULL,
-  `status` int(11) NOT NULL COMMENT 'correct=1, wrong=0',
-  PRIMARY KEY (`submission_id`),
-  KEY `member_id` (`member_id`),
-  KEY `quiz_id` (`quiz_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
-
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `airtime_winners`
+--
+ALTER TABLE `airtime_winners`
+  ADD CONSTRAINT `airtime_winners_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `members` (`member_id`);
 
 --
 -- Constraints for table `probation`
 --
 ALTER TABLE `probation`
   ADD CONSTRAINT `probation_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `members` (`member_id`);
-
---
--- Constraints for table `submissions`
---
-ALTER TABLE `submissions`
-  ADD CONSTRAINT `submissions_ibfk_1` FOREIGN KEY (`member_id`) REFERENCES `members` (`member_id`),
-  ADD CONSTRAINT `submissions_ibfk_2` FOREIGN KEY (`quiz_id`) REFERENCES `quest_answer` (`quiz_id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
