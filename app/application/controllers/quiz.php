@@ -22,9 +22,11 @@ class Quiz extends CI_Controller {
 
 
 		#form user
-		$phone_number = @$_POST['from'];
-		$to = @$_POST['to'];//shot code(sender)
-		$message_from_user = trim(strtolower(@$_POST['text']));
+		$phone_number = @$_REQUEST['from'];
+		$to = @$_REQUEST['to'];//shot code(sender)
+		$message_from_user = trim(strtolower(@$_REQUEST['text']));
+
+		echo $phone_number;
 
 		if (substr($message_from_user, 0, 4) == "aht " )
 		{
@@ -34,7 +36,7 @@ class Quiz extends CI_Controller {
 		}
 
 		
-		$this->receive_new_sms($username, $apikey);
+		#$this->receive_new_sms($username, $apikey);
 	}
 	
 	#@deebeat-> receive_sms(using the GateWay)(From the API)
