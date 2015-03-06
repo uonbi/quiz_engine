@@ -20,18 +20,19 @@ class Quiz extends CI_Controller {
 		$username = "codejamer";
 		$apikey = "097b5f8c738a0bcfa8899ce0c7da3324a728c5921132e3b1c89065316fb00dae";
 
-
 		#details from the user
-		$phone_number = $_POST['from'];
-		$sender = $_POST['to'];//shot code(sender)
-		$message_from_user = trim(strtolower($_POST['text']));
+		$phone_number = $this->input->post('from');
+		$sender = $this->input->post('to');//shot code(sender)
+		$user_message = trim(strtolower($this->input->post('text')));
 
-		$message_from_user = substr($message_from_user, 0, 5);
+		$message_from_user = substr($user_message, 0, 5);
 		$succeeding_msg = substr($message_from_user, 6);
+
 		$current_date_time = date("Y-m-d H:i:s");
 
 		if ($message_from_user == "hunt ")
 		{
+
 
 			#check db if the user already exists
 			#$this->quiz_model
@@ -43,6 +44,8 @@ class Quiz extends CI_Controller {
 
 			#send the user a question
 			#$this->receive_user_msg($phone_number, $succeeding_msg, $current_date_time, $sender);
+
+			$this->receive_user_msg($phone_number, $succeeding_msg, $current_date_time, $sender);
 		}
 
 	}
@@ -51,9 +54,6 @@ class Quiz extends CI_Controller {
 	#send sms to a user
 	public function send_new_sms($recipient, $new_question, $sender)
 	{
-		#$recipient = "+254711XXXYYYZZZ,+254733XXXYYYZZZ";
-		// And of course we want our recipient to know what we really do
-		#$new_question = "I'm a lumberjack and its ok, I sleep all night and I work all day";
 
 		#credentials
 		$username   = "codejamer";
@@ -71,17 +71,6 @@ class Quiz extends CI_Controller {
 
 			$results = $gateway->sendMessage($recipient, $new_question, $sender);
 				
-				//var_dump(print_r($results,true));
-				//exit();
-
-			//echo $apikey;
-			foreach($results as $result) {
-				// Note that only the Status "Success" means the message was sent
-				echo " Number: " .$result->number;
-				echo " Status: " .$result->status;
-				echo " MessageId: " .$result->messageId;
-				echo " Cost: " .$result->cost."\n";
-			}
 		}
 		catch ( AfricasTalkingGatewayException $e )
 		{
@@ -93,12 +82,14 @@ class Quiz extends CI_Controller {
 	#end_receive_new_sms(x, y)->@deebeat
 
 	public function receive_user_msg($phone, $msg, $time, $sender){
-
 		#system access point
 		$msg = trim(strtolower($msg));
 
 		if($this->_no_such_user($phone)){
 			$this->reg_user($phone, $msg, $time);
+
+			/*$welcome_message = "Welcome to the Amazing Treasure Hunt:). Please reply with your name before we begin the hunt.\n{Powered by: Angani, Africa's Talking and SCI CodeJam}";
+			$this->send_new_sms($phone, $welcome_message, $sender);*/
 
 			#@deebeat_edits
 			#send new user a question
