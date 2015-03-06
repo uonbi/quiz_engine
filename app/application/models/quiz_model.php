@@ -122,7 +122,7 @@ class Quiz_model extends CI_Model {
 
 	}
 	public function get_prob_stats($phone){
-		$result = $this->db->getwhere('members', array('phone'=>$phone));
+		$result = $this->db->get_where('members', array('phone'=>$phone));
 
 		if($result){
 			return $result;

@@ -136,9 +136,9 @@ class Quiz extends CI_Controller {
 			} else {
 				echo 'I am here';
 				#wrong answer was submitted
-				if($this->to_probation($phone) == false){
+				if($this->to_probation($phone) != true){
 					$same_question = $this->sendQue($phone);
-					echo 'on probation';
+					echo 'not probation yet';
 					#@deebeat
 					$this->send_new_sms($phone, $same_question, $sender);
 				} else {
