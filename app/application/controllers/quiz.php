@@ -22,9 +22,9 @@ class Quiz extends CI_Controller {
 
 
 		#details from the user
-		$phone_number = $_POST['from'];
-		$sender = $_POST['to'];//shot code(sender)
-		$message_from_user = trim(strtolower($_POST['text']));
+		$phone_number = $this->input->post('from');
+		$sender = $this->input->post('to');//shot code(sender)
+		$message_from_user = trim(strtolower($this->input->post('text')));
 
 		$message_from_user = substr($message_from_user, 0, 5);
 		$succeeding_msg = substr($message_from_user, 6);
@@ -75,13 +75,13 @@ class Quiz extends CI_Controller {
 				//exit();
 
 			//echo $apikey;
-			foreach($results as $result) {
+			/*foreach($results as $result) {
 				// Note that only the Status "Success" means the message was sent
 				echo " Number: " .$result->number;
 				echo " Status: " .$result->status;
 				echo " MessageId: " .$result->messageId;
 				echo " Cost: " .$result->cost."\n";
-			}
+			}*/
 		}
 		catch ( AfricasTalkingGatewayException $e )
 		{
@@ -93,7 +93,6 @@ class Quiz extends CI_Controller {
 	#end_receive_new_sms(x, y)->@deebeat
 
 	public function receive_user_msg($phone, $msg, $time){
-
 		#system access point
 		$msg = trim(strtolower($msg));
 
