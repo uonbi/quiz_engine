@@ -106,10 +106,11 @@ class Quiz extends CI_Controller {
 		try
 		{
 			// Thats it, hit send and we'll take care of the rest.
-			
+			phpinfo();
+			exit();
+
 			$results = $gateway->sendMessage($recipient, $new_question, $sender);
-				phpinfo();
-				exit();
+				
 				//var_dump(print_r($results,true));
 				//exit();
 
