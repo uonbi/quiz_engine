@@ -80,7 +80,9 @@ class Quiz_model extends CI_Model {
 		#get question number for this user and update(ready for next question)
 		$data['quiz_count'] = $this->get_question_count($phone) + 1;
 
-		if ($this->db->update('members', $data)->run()){
+		$result = $this->db->update('members',$data);
+
+		if ($result){
 			return true;
 		}
 		else

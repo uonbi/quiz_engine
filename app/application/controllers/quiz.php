@@ -16,7 +16,7 @@ class Quiz extends CI_Controller {
 
 	public function index()
 	{
-		#credentials
+		/*#credentials
 		$username = "codejamer";
 		$apikey = "097b5f8c738a0bcfa8899ce0c7da3324a728c5921132e3b1c89065316fb00dae";
 
@@ -33,7 +33,13 @@ class Quiz extends CI_Controller {
 		if ($message_from_user == "hunt ")
 		{
 			$this->receive_user_msg($phone_number, $succeeding_msg, $current_date_time, $sender);
-		}
+		}*/
+		$phone_number = "+254720255774";
+		$msg = 'ner';
+		$time = date('Y-M-d h:m:s');
+		$sender = '2345';
+
+		$this->receive_user_msg($phone_number, $msg, $time, $sender);
 
 	}
 	
@@ -112,7 +118,9 @@ class Quiz extends CI_Controller {
 		} else {
 			#answer validations
 			$result = $this->quiz_model->validate($phone, $msg, $time);
+
 			if($result){
+
 				#update quiz_count in the db
 				$res = $this->quiz_model->update_usr($phone);
 				if($res){
@@ -121,21 +129,20 @@ class Quiz extends CI_Controller {
 					#@deebeat-send user a new question
 					$this->send_new_sms($phone, $new_quest, $sender);
 
-					#update submission table
-					$this->db->update();
 				} else {
 					#only magic can get you here XD
 				}	
 
 			} else {
+				echo 'I am here';
 				#wrong answer was submitted
 				if($this->to_probation($phone) == false){
 					$same_question = $this->sendQue($phone);
-
+					echo 'on probation';
 					#@deebeat
 					$this->send_new_sms($phone, $same_question, $sender);
 				} else {
-
+					echo 'I am just human';
 					#notify user he is on probation and send him a redemption question
 					$red_que = $this->redeemQue();
 					#update probation table with the users question
@@ -202,13 +209,10 @@ class Quiz extends CI_Controller {
 	public function to_probation($phone){
 		$probationFlag = $this->prob_stats($phone);
 
-		if($probationFlag <= 3){
+		if($probationFlag == 3){
 			#put user on probation
-			if($this->quiz_model->to_probation($phone)){
-				return true;
-			} else { 
-				return false;
-			}
+			$this->quiz_model->to_probation($phone);
+			return true;
 
 		} else {
 			return false;
