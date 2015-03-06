@@ -156,8 +156,11 @@ class Quiz extends CI_Controller {
 				if($res){
 					$new_quest = $this->sendQue($phone);
 
-					#@deebeat
+					#@deebeat-send user a new question
 					$this->send_new_sms($phone, $new_quest);
+
+					#update submission table
+					$this->db->update();
 				} else {
 					#only magic can get you here XD
 				}	
@@ -303,6 +306,15 @@ class Quiz extends CI_Controller {
 		} else {
 			return false;
 		}
+	}
+
+
+	#@deebeat-begin-edits()
+	#method to reward the first 20 pple to get the first 5 questions correct with airtime
+	public function award_airtime()
+	{
+		#array of phone numbers
+		$awardees = $this->quiz_model->get_fast_responders();
 	}
 
 }
