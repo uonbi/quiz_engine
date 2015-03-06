@@ -95,7 +95,7 @@ class Quiz extends CI_Controller {
 				// Note that only the Status "Success" means the message was sent
 				echo " Number: " .$result->number;
 				echo " Status: " .$result->status;
-				echo " MessageId: " .$result->messageId;
+				echo " MessageId: ".$result->messageId;
 				echo " Cost: " .$result->cost."\n";
 			}
 		}
