@@ -16,7 +16,7 @@ class Quiz extends CI_Controller {
 
 	public function index()
 	{
-		/*#credentials
+		#credentials
 		$username = "codejamer";
 		$apikey = "097b5f8c738a0bcfa8899ce0c7da3324a728c5921132e3b1c89065316fb00dae";
 
@@ -33,11 +33,11 @@ class Quiz extends CI_Controller {
 		if ($message_from_user == "hunt ")
 		{
 			$this->receive_user_msg($phone_number, $succeeding_msg, $current_date_time, $sender);
-		}*/
-		$phone_number = "+254720255774";
+		}
+		/*$phone_number = "+254720255774";
 		$msg = 'ner';
 		$time = date('Y-M-d h:m:s');
-		$sender = '2345';
+		$sender = '2345';*/
 
 		$this->receive_user_msg($phone_number, $msg, $time, $sender);
 
@@ -97,7 +97,7 @@ class Quiz extends CI_Controller {
 
 			#validate redemption ans
 
-			$result = $this->redeem_validation($phone, $msg);
+			$result = $this->quiz_model->redeem_module($phone, $msg);
 			if($result){
 				#successfully redeemed his|herself
 				$next_que = $this->sendQue($phone);
@@ -141,14 +141,10 @@ class Quiz extends CI_Controller {
 					$var = $this->prob_stats($phone) + 1;
 	
 					$result = $this->prob_stats_update($phone, $var);
-					var_dump($result);
-
-					echo $same_question.'man!!! :(';
 
 					#@deebeat
 					$this->send_new_sms($phone, $same_question, $sender);
 				} else {
-					echo 'I am just human';
 					#notify user he is on probation and send him a redemption question
 					$red_que = $this->redeemQue();
 					#update probation table with the users question

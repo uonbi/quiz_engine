@@ -206,8 +206,8 @@ class Quiz_model extends CI_Model {
 		}
 	}
 	public function redeem_module($var,$phone){
-		$result = $this->db->query("SELECT * FROM redemptions INNER JOIN probation ON probation.redeem_quest = redemptions.owner
-						WHERE redemptions.owner = $var AND probation.member_id = redemptions.member_id LIMIT 0 , 30");
+		$result = $this->db->query("SELECT * FROM redemptions INNER JOIN members ON members.redeem_quest = redemptions.owner
+						WHERE redemptions.owner = $var AND members.member_id = redemptions.member_id LIMIT 0 , 30");
 		if($result){
 			return true;
 		} else {
