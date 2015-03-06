@@ -97,7 +97,7 @@ class Quiz extends CI_Controller {
 
 		#credentials
 		$username   = "codejamer";
-		$apikey = "097b5f8c738a0bcfa8899ce0c7da3324a728c5921132e3b1c89065316fb00dae";
+		$apikey = "097b5f8c738a0bcfa8899ce0c7da3324a728c5921132e3b1c89065316fb00da";
 
 		// Create a new instance of our awesome gateway class
 		$gateway = new AfricasTalkingGateway($username, $apikey);
