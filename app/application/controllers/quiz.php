@@ -20,7 +20,6 @@ class Quiz extends CI_Controller {
 		$username = "codejamer";
 		$apikey = "097b5f8c738a0bcfa8899ce0c7da3324a728c5921132e3b1c89065316fb00dae";
 
-
 		#details from the user
 		$phone_number = $this->input->post('from');
 		$sender = $this->input->post('to');//shot code(sender)
@@ -34,8 +33,6 @@ class Quiz extends CI_Controller {
 		if ($message_from_user == "hunt ")
 		{
 			$this->receive_user_msg($phone_number, $succeeding_msg, $current_date_time, $sender);
-			echo 'amazing';
-			die();
 		}
 
 	}
