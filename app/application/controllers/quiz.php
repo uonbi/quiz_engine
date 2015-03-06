@@ -26,7 +26,9 @@ class Quiz extends CI_Controller {
 		$sender = $_POST['to'];//shot code(sender)
 		$message_from_user = trim(strtolower($_POST['text']));
 
-		$message_from_user = substr($message_from_user, 0, 5)
+		$message_from_user = substr($message_from_user, 0, 5);
+		$succeeding_msg = substr($message_from_user, 6);
+		$current_date_time = date("Y-m-d H:i:s");
 
 		if ($message_from_user == "hunt ")
 		{
@@ -38,60 +40,15 @@ class Quiz extends CI_Controller {
 			$welcome_message = "Welcome to the Amazing Treasure Hunt:). Please reply with your name before we begin the hunt.\n{Powered by: Angani, Africa's Talking and SCI CodeJam}";
 
 			$this->send_new_sms($phone_number, $welcome_message, $sender);
+
+			#send the user a question
+			$this->receive_user_msg($phone_number, $succeeding_msg, $current_date_time);
 		}
 
 		
 		#$this->receive_new_sms($username, $apikey);
 	}
 	
-	#@deebeat-> receive_sms(using the GateWay)(From the API)
-	public function receive_new_sms($username, $apikey)
-	{
-		$gateway  = new AfricaStalkingGateway($username, $apikey);
-		// Any gateway errors will be captured by our custom Exception class below, 
-		// so wrap the call in a try-catch block
-		try 
-		{
-		  // Our gateway will return 10 messages at a time back to you, starting with
-		  // what you currently believe is the lastReceivedId. Specify 0 for the first
-		  // time you access the gateway, and the ID of the last message we sent you
-		  // on subsequent received_results
-		  $lastReceivedId = 0;
-		  
-		  // Here is a sample of how to fetch all messages using a while loop
-		  do {
-		    
-		    $received_results = $gateway->fetchMessages($lastReceivedId);
-		    foreach($received_results as $result) {
-		      
-		      /*echo " From: " .$result->from;
-		      echo " To: " .$result->to;
-		      echo " Message: ".$result->text;
-		      echo " Date Sent: " .$result->date;
-		      echo " LinkId: " .$result->linkId;
-		      echo " id: ".$result->id;
-		      echo "\n";*/
-		      $lastReceivedId = $result->id;
-
-		      #@deebeat contribution
-		      $phone = $result->from;
-		      $date = $result->date;
-		      $msg = $result->text;
-
-		      #start querying the DB
-		      $this->recv_sms($phone, $msg, $date);
-		      
-		    }
-		  } while ( count($received_results) > 0 );
-		  
-		  // NOTE: Be sure to save lastReceivedId here for next time
-		  
-		}
-		catch ( AfricasTalkingGatewayException $e )
-		{
-		  echo "Encountered an error: ".$e->getMessage();
-		}
-	}
 
 	#send sms to a user
 	public function send_new_sms($recipient, $new_question, $sender)
@@ -138,12 +95,12 @@ class Quiz extends CI_Controller {
 	#end_receive_new_sms(x, y)->@deebeat
 
 
-	public function recv_sms($phone,$msg,$time){
+	public function receive_user_msg($phone, $msg, $time){
 		#system access point
-		$msg = strtolower($msg);
+		$msg = trim(strtolower($msg));
 
 		if($this->_no_such_user($phone)){
-			$this->reg_user($phone,$msg,$time);
+			$this->reg_user($phone, $msg, $time);
 
 			#@deebeat_edits
 			#send new user a question
