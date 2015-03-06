@@ -30,7 +30,7 @@ class Quiz extends CI_Controller {
 		if (substr($message_from_user, 0, 5) == "hunt " )
 		{
 			$name = trim(substr($message_from_user, 5));
-			$welcome_message = "Hey, ".ucfirst($name)."{".$phone_number."} to the Amazing Treasure Hunt:). We are debugging!";
+			$welcome_message = "Hey, ".ucfirst($name)."{".$phone_number."}, Welcome to the Amazing Treasure Hunt:). Chill man, we are debugging!";
 
 			$this->send_new_sms($phone_number, $welcome_message, $sender);
 		}
