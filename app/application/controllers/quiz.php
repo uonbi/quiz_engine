@@ -28,12 +28,12 @@ class Quiz extends CI_Controller {
 
 		echo $phone_number;
 
-		if (substr($message_from_user, 0, 4) == "aht " )
-		{
+		//if (substr($message_from_user, 0, 4) == "aht " )
+		//{
 			$message_from_user = trim(substr($message_from_user, 4));
 
 			$this->send_new_sms($phone_number, $message_from_user, $to);
-		}
+		//}
 
 		
 		#$this->receive_new_sms($username, $apikey);
