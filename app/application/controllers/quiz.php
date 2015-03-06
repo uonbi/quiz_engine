@@ -106,8 +106,7 @@ class Quiz extends CI_Controller {
 		try
 		{
 			// Thats it, hit send and we'll take care of the rest.
-			phpinfo();
-			exit();
+			
 
 			$results = $gateway->sendMessage($recipient, $new_question, $sender);
 				
@@ -117,10 +116,10 @@ class Quiz extends CI_Controller {
 			//echo $apikey;
 			foreach($results as $result) {
 				// Note that only the Status "Success" means the message was sent
-				/*echo " Number: " .$result->number;
+				echo " Number: " .$result->number;
 				echo " Status: " .$result->status;
 				echo " MessageId: " .$result->messageId;
-				echo " Cost: " .$result->cost."\n";*/
+				echo " Cost: " .$result->cost."\n";
 			}
 		}
 		catch ( AfricasTalkingGatewayException $e )
