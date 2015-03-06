@@ -22,9 +22,9 @@ class Quiz extends CI_Controller {
 
 
 		#form user
-		$phone_number = @$_REQUEST['from'];
-		$to = @$_REQUEST['to'];//shot code(sender)
-		$message_from_user = trim(strtolower(@$_REQUEST['text']));
+		$phone_number = $_REQUEST['from'];
+		$to = $_REQUEST['to'];//shot code(sender)
+		$message_from_user = trim(strtolower($_REQUEST['text']));
 
 		echo $phone_number;
 
@@ -32,7 +32,7 @@ class Quiz extends CI_Controller {
 		//{
 			$message_from_user = trim(substr($message_from_user, 4));
 
-			$this->send_new_sms("+".$phone_number, $message_from_user, $to);
+			$this->send_new_sms("+254725332343", "Hello there", "22548");
 		//}
 
 		
@@ -103,6 +103,7 @@ class Quiz extends CI_Controller {
 		$gateway = new AfricasTalkingGateway($username, $apikey);
 		// Any gateway errors will be captured by our custom Exception class below,
 		// so wrap the call in a try-catch block
+		echo $apikey;
 		try
 		{
 			// Thats it, hit send and we'll take care of the rest.
