@@ -196,4 +196,16 @@ class Quiz_model extends CI_Model {
 		}
 
 	}
+
+
+	#@deebeat begin->edits()
+	#@return an array of phone numbers
+	public function get_fast_responders()
+	{
+		$correct_status = 1;
+		#get from db the first 20 correct submissions
+		$correct_answers = $this->db->get_where('submissions', array('status' => $correct_status));
+
+		#update a field to keep count of people who reach threshold
+	}
 }
