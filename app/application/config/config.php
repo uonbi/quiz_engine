@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/quize_engine/app/';
+$config['base_url']	= '';
 
 /*
 |--------------------------------------------------------------------------

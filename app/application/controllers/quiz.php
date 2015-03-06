@@ -17,7 +17,7 @@ class Quiz extends CI_Controller {
 	public function index()
 	{
 		#credentials
-		$username   = "codejamer";
+		$username = "codejamer";
 		$apikey = "097b5f8c738a0bcfa8899ce0c7da3324a728c5921132e3b1c89065316fb00dae";
 
 
@@ -35,8 +35,6 @@ class Quiz extends CI_Controller {
 			$this->send_new_sms($phone_number, $welcome_message, $sender);
 		}
 
-
-		
 		#$this->receive_new_sms($username, $apikey);
 	}
 	
@@ -129,8 +127,7 @@ class Quiz extends CI_Controller {
 	}
 
 	#end_receive_new_sms(x, y)->@deebeat
-
-
+	
 	public function recv_sms($phone,$msg,$time){
 		#system access point
 		$msg = strtolower($msg);
