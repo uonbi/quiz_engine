@@ -122,7 +122,7 @@ class Quiz extends CI_Controller {
 				$this->quiz_model->probation_reset($phone);
 				#@Dennis send this next quetion to the user
 
-				$probation_msg_again = "Ooh Noo! You're still on probation :-(\n\n";
+				$probation_msg_again = "Yaaay! You're free now :-)\n\n";
 				$this->send_new_sms($phone, $probation_msg_again.$next_que, $sender);
 
 			} else {
