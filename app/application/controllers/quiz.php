@@ -30,7 +30,7 @@ class Quiz extends CI_Controller {
 
 		$current_date_time = date("Y-m-d H:i:s");
 
-		if ($message_from_user == "hunt ")
+		if ($message_from_user == "hunt:")
 		{
 
 			#send the user a question
@@ -39,7 +39,7 @@ class Quiz extends CI_Controller {
 			#$this->receive_user_msg($phone_number, $succeeding_msg, $current_date_time, $sender);
 		}
 		/*$phone_number = "+254720255774";
-		$msg = 'nerd';
+		$msg = 'hunt nerd';
 		$time = date('Y-M-d h:m:s');
 		$sender = '2345';
 
@@ -101,6 +101,8 @@ class Quiz extends CI_Controller {
 		} elseif ($this->_on_probation($phone)) {
 
 			#validate redemption ans
+			$probation_question = $this->redeem_message($this->redeemQue());
+			$this->send_new_sms($recipient, $probation_question, $sender);
 
 			$result = $this->quiz_model->redeem_module($phone, $msg);
 			if($result){
