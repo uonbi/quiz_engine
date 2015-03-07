@@ -167,23 +167,25 @@ class Quiz extends CI_Controller {
 					$same_question = $this->sendQue($phone);
 					$var = $this->prob_stats($phone) + 1;
 
-					$congrats = "Incorrect answer :(. Please try again.!\n\n";
+					$failure_message = "Incorrect answer :(. Please try again.!\n\n";
 	
 					$result = $this->prob_stats_update($phone, $var);
 
 					#@deebeat
-					$this->send_new_sms($phone, $congrats.$same_question, $sender);
+					$this->send_new_sms($phone, $failure_message.$same_question, $sender);
 				} else {
 					#notify user he is on probation and send him a redemption question
 					$red_que = $this->redeemQue();
 					#update probation table with the users question
 					$this->quiz_model->update_probation($phone, $red_que);
 
+					$probation_message = "Sorry, You are on probation :D\n\n";
+
 					$msg = $this->redeem_message($red_que);
 					#Dennis pick the message to send here.
 
 					#@deebeat
-					$this->send_new_sms($phone, $msg, $sender);
+					$this->send_new_sms($probation_message.$phone, $msg, $sender);
 
 				}
 			}
