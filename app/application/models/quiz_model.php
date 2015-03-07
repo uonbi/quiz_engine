@@ -177,10 +177,11 @@ class Quiz_model extends CI_Model {
 
 	public function probation_reset($phone){
 		$data = array(
-			'probation_status' => 0
+			'probation_status' => 0,
+			'probationFlag'    => 0
 			);
 		$this->db->where('phone',$phone);
-		$result = $this->db->update('probation', $data);
+		$result = $this->db->update('members', $data);
 
 		if($result){
 			return true;

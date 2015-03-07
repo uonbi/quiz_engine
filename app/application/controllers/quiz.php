@@ -120,6 +120,7 @@ class Quiz extends CI_Controller {
 				#successfully redeemed his|herself
 				$next_que = $this->sendQue($phone);
 
+				$this->quiz_model->probation_reset($phone);
 				#@Dennis send this next quetion to the user
 				$this->send_new_sms($phone, $next_que, $sender);
 
