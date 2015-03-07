@@ -26,7 +26,7 @@ class Quiz extends CI_Controller {
 		$user_message = trim(strtolower($this->input->post('text')));
 
 		$message_from_user = substr($user_message, 0, 5);
-		$succeeding_msg = substr($message_from_user, 6);
+		$succeeding_msg = substr($message_from_user, 5);
 
 		$current_date_time = date("Y-m-d H:i:s");
 
@@ -90,11 +90,6 @@ class Quiz extends CI_Controller {
 
 			#@deebeat_edits
 			#send new user a question
-
-			#@shimanyi
-			#register username
-			$reg_username = "Enter your name ?";
-			$this->send_new_sms($phone, $reg_username, $sender);
 
 			$opener_question = $this->sendQue($phone);
 
