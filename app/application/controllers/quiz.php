@@ -38,14 +38,14 @@ class Quiz extends CI_Controller {
 			#$this->quiz_model
 
 			#Welcome user and request their name
-			$welcome_message = "Welcome to the Amazing Treasure Hunt:). Please reply with your name before we begin the hunt.\n\nPowered by: SCI CodeJam";
+			/*$welcome_message = "Welcome to the Amazing Treasure Hunt:). Please reply with your name before we begin the hunt.\n\nPowered by: SCI CodeJam";
 
-			$this->send_new_sms($phone_number, $succeeding_msg, $sender);
+			$this->send_new_sms($phone_number, $welcome_message, $sender);*/
 
 			#send the user a question
 			#$this->receive_user_msg($phone_number, $succeeding_msg, $current_date_time, $sender);
 
-			#$this->receive_user_msg($phone_number, $succeeding_msg, $current_date_time, $sender);
+			$this->receive_user_msg($phone_number, $succeeding_msg, $current_date_time, $sender);
 		}
 		/*$phone_number = "+254720255774";
 		$msg = 'ner';
