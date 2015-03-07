@@ -23,14 +23,14 @@ class Quiz extends CI_Controller {
 		#details from the user
 		$phone_number = $this->input->post('from');
 		$sender = $this->input->post('to');//shot code(sender)
-		$user_message = trim(strtolower($this->input->post('text')));
+		$user_message = trim(strtolower($_REQUEST));
 
 		$message_from_user = substr($user_message, 0, 5);
 		$succeeding_msg = substr($message_from_user, 5);
 
 		$current_date_time = date("Y-m-d H:i:s");
 
-		if ($message_from_user == "hunt:")
+		if ($message_from_user == "hunt ")
 		{
 
 			#send the user a question
