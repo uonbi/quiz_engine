@@ -69,8 +69,6 @@ class Quiz extends CI_Controller {
 
 	}
 
-	}
-
 	#send sms to a user
 	public function send_new_sms($recipient, $new_question, $sender)
 	{
