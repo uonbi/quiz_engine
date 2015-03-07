@@ -36,7 +36,7 @@ class Quiz extends CI_Controller {
 
 			#send the user a question
 			$this->receive_user_msg($phone_number, $succeeding_msg, $current_date_time, $sender);
-			
+
 
 			#$this->receive_user_msg($phone_number, $succeeding_msg, $current_date_time, $sender);
 		}
@@ -147,7 +147,8 @@ class Quiz extends CI_Controller {
 					$new_quest = $this->sendQue($phone);
 
 					#@deebeat-send user a new question
-					$this->send_new_sms($phone, $new_quest, $sender);
+					$congrats = "Congratulations Treasure Hunter!\nNext Question\n";
+					$this->send_new_sms($phone, $congrats.$new_quest, $sender);
 
 				} else {
 					#only magic can get you here XD
