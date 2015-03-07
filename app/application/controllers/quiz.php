@@ -26,7 +26,7 @@ class Quiz extends CI_Controller {
 		$user_message = trim(strtolower($this->input->post('text')));
 
 		$message_from_user = substr($user_message, 0, 5);
-		$succeeding_msg = substr($message_from_user, 5);
+		$succeeding_msg = substr($user_message, 5);
 
 		$current_date_time = date("Y-m-d H:i:s");
 
