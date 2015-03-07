@@ -47,7 +47,7 @@ class Quiz extends CI_Controller {
 			#case 1, get the winners
 			if($params == "winners")
 			{
-				
+			/*	
 				$i = 0;
 				$records = 0;
 				$data = array();
@@ -58,9 +58,9 @@ class Quiz extends CI_Controller {
 					$records+=1;
 				}
 
-				$header_msg = "Hi admin(".$phone_number."), Winner's numbers are as followes::\n\n";
+				$header_msg = "Hi admin(".$phone_number."), Winner's numbers are as followes::\n\n";*/
 
-				$this->send_new_sms($phone_number, $header_msg.$data, $sender);
+				$this->send_new_sms($phone_number, 'suusp', $sender);
 
 			}
 			
