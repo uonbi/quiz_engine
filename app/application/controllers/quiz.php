@@ -38,9 +38,9 @@ class Quiz extends CI_Controller {
 			#$this->quiz_model
 
 			#Welcome user and request their name
-			$welcome_message = "Welcome to the Amazing Treasure Hunt:). Please reply with your name before we begin the hunt.\n\nPowered by: SCI CodeJam";
+			/*$welcome_message = "Welcome to the Amazing Treasure Hunt:). Please reply with your name before we begin the hunt.\n\nPowered by: SCI CodeJam";
 
-			$this->send_new_sms($phone_number, $welcome_message, $sender);
+			$this->send_new_sms($phone_number, $welcome_message, $sender);*/
 
 			#send the user a question
 			#$this->receive_user_msg($phone_number, $succeeding_msg, $current_date_time, $sender);
@@ -94,8 +94,8 @@ class Quiz extends CI_Controller {
 		if($this->_no_such_user($phone)){
 			$this->reg_user($phone, $msg, $time);
 
-			/*$welcome_message = "Welcome to the Amazing Treasure Hunt:). Please reply with your name before we begin the hunt.\n{Powered by: Angani, Africa's Talking and SCI CodeJam}";
-			$this->send_new_sms($phone, $welcome_message, $sender);*/
+			$welcome_message = "Welcome to the Amazing Treasure Hunt:). Please reply with your name before we begin the hunt.\n{Powered by: Angani, Africa's Talking and SCI CodeJam}";
+			$this->send_new_sms($phone, $welcome_message, $sender);
 
 			#@deebeat_edits
 			#send new user a question
