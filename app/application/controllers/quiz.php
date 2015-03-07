@@ -38,7 +38,7 @@ class Quiz extends CI_Controller {
 		}
 
 		#admin module
-		#sample: codejam_admin winners(to go in the controller)
+		#sample: admcn winners(to go in the controller)
 		if ($message_from_user == "admc ")
 		{
 			#allow admin to to get a list of first 20 winners
@@ -49,9 +49,17 @@ class Quiz extends CI_Controller {
 			{
 				$winners = $this->quiz_model->admin_get_winners();
 
+				$data = array();
+
+				foreach($winners->result() as $row)
+				{
+					$data['phone'] = $row->phone;
+					$data['name'] = $row->name;
+				}
+
 				$header_msg = "Hi admin(".$phone_number."), Winner's numbers are as followes::\n\n";
 
-				$this->send_new_sms($phone_number, $header_msg.$winners, $sender);
+				$this->send_new_sms($phone_number, $header_msg.$data, $sender);
 
 			}
 			
@@ -98,7 +106,7 @@ class Quiz extends CI_Controller {
 		if($this->_no_such_user($phone)){
 			$this->reg_user($phone, $msg, $time);
 
-			$welcome_message = "Welcome to the Amazing Treasure Hunt :-). Please attempt the following techie written charades. Show us your tecHistory\nPowered by: SCI CodeJam, Angani Ltd and Africa's Talking";
+			$welcome_message = "Welcome to the Amazing Treasure Hunt :-). Please attempt the following techie written charades. Show us your tecHistory\nPowered by: SCI CodeJam, Angani Ltd and Africa's Talking\n\n";
 			$this->send_new_sms($phone, $welcome_message, $sender);
 
 			#@deebeat_edits

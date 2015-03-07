@@ -250,6 +250,10 @@ class Quiz_model extends CI_Model {
 		{
 			return $winners;
 		}
+		else
+		{
+			return false;
+		}
 
 	}
 }
