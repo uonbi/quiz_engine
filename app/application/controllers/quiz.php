@@ -37,6 +37,28 @@ class Quiz extends CI_Controller {
 			$this->receive_user_msg($phone_number, $succeeding_msg, $current_date_time, $sender);
 		}
 
+
+		#admin module
+		#sample: codejam_admin winners(to go in the controller)
+		if ($message_from_user == "admc ")
+		{
+			#allow admin to to get a list of first 20 winners
+			$params = substr($message_from_user, 5);
+
+			#case 1, get the winners
+			if($params == "winners")
+			{
+				$winners = $this->quiz_model->admin_get_winners();
+
+				$header_msg = "Hi admin(".$phone_number."), Winner's numbers are as followes::\n\n";
+
+				$this->send_new_sms($phone_number, $header_msg.$winners, $sender);
+
+			}
+			
+
+		}
+
 	}
 	
 

@@ -237,4 +237,18 @@ class Quiz_model extends CI_Model {
 
 		#update a field to keep count of people who reach threshold
 	}
+
+	#function admin_get_winners() to go to the model
+	public function admin_get_winners()
+	{
+		$winners = $this->db->query("SELECT phone, name FROM members 
+												INNER JOIN airtime_winners
+												ON members.member_id = airtime_winners.member_id ORDER BY date_time ASC LIMIT 20");
+
+		if($winners)
+		{
+			return $winners;
+		}
+
+	}
 }
