@@ -75,19 +75,16 @@ class Quiz_model extends CI_Model {
 	#updates user's count when they get the answer right
 	public function update_usr($phone)
 	{
-		$this->db->where('phone', $phone);
-		$data = array();
+		$data = array(
+			'quiz_count' => $this->get_question_count($phone) + 1
+			);
+		
+		$this->db->where('phone',$phone);
+		$result = $this->db->update('members', $data);
 
-		#get question number for this user and update(ready for next question)
-		$data['quiz_count'] = $this->get_question_count($phone) + 1;
-
-		$result = $this->db->update('members',$data);
-
-		if ($result){
+		if($result){
 			return true;
-		}
-		else
-		{
+		} else {
 			return false;
 		}
 	}
