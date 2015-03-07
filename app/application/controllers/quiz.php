@@ -39,9 +39,11 @@ class Quiz extends CI_Controller {
 			#$this->receive_user_msg($phone_number, $succeeding_msg, $current_date_time, $sender);
 		}
 		/*$phone_number = "+254720255774";
-		$msg = 'ner';
+		$msg = 'nerd';
 		$time = date('Y-M-d h:m:s');
-		$sender = '2345';*/
+		$sender = '2345';
+
+		var_dump($this->quiz_model->validate($phone_number, $msg, $time));*/
 
 	}
 	
@@ -88,6 +90,12 @@ class Quiz extends CI_Controller {
 
 			#@deebeat_edits
 			#send new user a question
+
+			#@shimanyi
+			#register username
+			$reg_username = "Enter your name ?";
+			$this->send_new_sms($phone, $reg_username, $sender);
+
 			$opener_question = $this->sendQue($phone);
 
 			#send using API helper function
