@@ -148,7 +148,7 @@ class Quiz extends CI_Controller {
 
 					#@deebeat-send user a new question
 					$congrats = "Congratulations Treasure Hunter!\nNext Question\n\n";
-					$final_congrats = "Congratulations. You've hunted all the treasures. We will contact you shortly to let you know how you will collect your gift.\n\nSCI CodeJam, Proudly powered by Angani Ltd and Africa's Talking."
+					$final_congrats = "Congratulations. You've hunted all the treasures. We will contact you shortly to let you know how you will collect your gift.\n\nSCI CodeJam, Proudly powered by Angani Ltd and Africa's Talking.";
 
 					$questions_answered = $this->quiz_model->get_question_count($phone);
 
