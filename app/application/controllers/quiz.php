@@ -43,8 +43,6 @@ class Quiz extends CI_Controller {
 		$time = date('Y-M-d h:m:s');
 		$sender = '2345';*/
 
-		$this->receive_user_msg($phone_number, $msg, $time, $sender);
-
 	}
 	
 
