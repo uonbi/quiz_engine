@@ -29,10 +29,11 @@ class Quiz extends CI_Controller {
 		$succeeding_msg = substr($message_from_user, 5);
 
 		$current_date_time = date("Y-m-d H:i:s");
-		die($succeeding_msg);
 
 		if ($message_from_user == "hunt ")
 		{
+				echo($succeeding_msg);
+				exit();
 
 			#send the user a question
 			$this->receive_user_msg($phone_number, $succeeding_msg, $current_date_time, $sender);
