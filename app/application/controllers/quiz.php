@@ -98,7 +98,7 @@ class Quiz extends CI_Controller {
 		if($this->_no_such_user($phone)){
 			$this->reg_user($phone, $msg, $time);
 
-			$welcome_message = "Welcome to the Amazing Treasure Hunt:). Please reply with your name before we begin the hunt.\n{Powered by: Angani, Africa's Talking and SCI CodeJam}";
+			$welcome_message = "Welcome to the Amazing Treasure Hunt:).\n[Powered by: SCI CodeJam, Angani Ltd and Africa's Talking]";
 			$this->send_new_sms($phone, $welcome_message, $sender);
 
 			#@deebeat_edits
@@ -147,7 +147,8 @@ class Quiz extends CI_Controller {
 					$new_quest = $this->sendQue($phone);
 
 					#@deebeat-send user a new question
-					$congrats = "Congratulations Treasure Hunter!\nNext Question\n";
+					$congrats = "Congratulations Treasure Hunter!\nNext Question\n\n";
+					$final_congrats = "Congratulations. You've hunted all the treasures. We will contact you shortly to let you know how you will collect your gift.\n\nSCI CodeJam, Proudly powered by Angani Ltd and Africa's Talking."
 					$this->send_new_sms($phone, $congrats.$new_quest, $sender);
 
 				} else {
