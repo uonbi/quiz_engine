@@ -98,7 +98,7 @@ class Quiz extends CI_Controller {
 		if($this->_no_such_user($phone)){
 			$this->reg_user($phone, $msg, $time);
 
-			$welcome_message = "Welcome to the Amazing Treasure Hunt:).\n[Powered by: SCI CodeJam, Angani Ltd and Africa's Talking]";
+			$welcome_message = "Welcome to the Amazing Treasure Hunt:). Please attempt the following written charades.\n[Powered by: SCI CodeJam, Angani Ltd and Africa's Talking]";
 			$this->send_new_sms($phone, $welcome_message, $sender);
 
 			#@deebeat_edits
@@ -147,12 +147,12 @@ class Quiz extends CI_Controller {
 					$new_quest = $this->sendQue($phone);
 
 					#@deebeat-send user a new question
-					$congrats = "Congratulations Treasure Hunter!\nNext Question\n\n";
-					$final_congrats = "Congratulations. You've hunted all the treasures. We will contact you shortly to let you know how you will collect your gift.\n\nSCI CodeJam, Proudly powered by Angani Ltd and Africa's Talking.";
+					$congrats = "Congratulations Treasure Hunter!\n\n";
+					#$final_congrats = "Congratulations. You've hunted all the treasures. We will contact you shortly to let you know how you will collect your gift.\n\nSCI CodeJam, Proudly powered by Angani Ltd and Africa's Talking.";
 
-					$questions_answered = $this->quiz_model->get_question_count($phone);
+					#$questions_answered = $this->quiz_model->get_question_count($phone);
 
-					$congrats = ($questions_answered >= 7) ? $final_congrats : $congrats;
+					#$congrats = ($questions_answered >= 7) ? $final_congrats : $congrats;
 
 					$this->send_new_sms($phone, $congrats.$new_quest, $sender);
 
@@ -293,7 +293,7 @@ class Quiz extends CI_Controller {
 		}
 	}
 	public function redeem_message($code_owner){
-		$redeem_msg = 'You on probation. Submit the '+$code_owner+' from their stand to reedem yourself';
+		$redeem_msg = 'You on probation. Submit the '.$code_owner.' from their stand to reedem yourself';
 		return $redeem_msg;
 	}	
 	public function redeem_module($var){
