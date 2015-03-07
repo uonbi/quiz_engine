@@ -37,7 +37,6 @@ class Quiz extends CI_Controller {
 			$this->receive_user_msg($phone_number, $succeeding_msg, $current_date_time, $sender);
 		}
 
-
 		#admin module
 		#sample: codejam_admin winners(to go in the controller)
 		if ($message_from_user == "admc ")
@@ -115,7 +114,7 @@ class Quiz extends CI_Controller {
 		} elseif ($this->_on_probation($phone)) {
 
 			#validate redemption ans
-			$result = $this->redeem_module($msg);
+			$result = $this->redeem_module($msg, $phone);
 			if($result){
 				#successfully redeemed his|herself
 				$next_que = $this->sendQue($phone);
@@ -294,11 +293,11 @@ class Quiz extends CI_Controller {
 		}
 	}
 	public function redeem_message($code_owner){
-		$redeem_msg = 'You are on probation. Submit the '.$code_owner.' from their stand|tree to reedem yourself';
+		$redeem_msg = "You are on probation.\n Submit the ".$code_owner." CODEJAM CODE from their stand|tree to reedem yourself";
 		return $redeem_msg;
 	}	
-	public function redeem_module($var){
-		$result = $this->quiz_model->redeem_module($var);
+	public function redeem_module($msg, $phone){
+		$result = $this->quiz_model->redeem_module($msg, $phone);
 
 		if($result){
 			return true;

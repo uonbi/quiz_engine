@@ -203,11 +203,11 @@ class Quiz_model extends CI_Model {
 			return false;
 		}
 	}
-	public function redeem_module($var){
+	public function redeem_module($var, $phone){
 		print_r($var);
 		$result = $this->db->query("SELECT * FROM redemptions INNER JOIN members ON members.redeem_quest = redemptions.owner
-						WHERE redemptions.owner = '$var' AND members.member_id = redemptions.member_id LIMIT 0 , 30");
-		if($result){
+						WHERE redemptions.owner = '$var' AND members.member_id = redemptions.member_id AND members.phone='$phone' LIMIT 0 , 30");
+		if($this->db->affected_rows() != 0){
 			return true;
 		} else {
 			return false;
