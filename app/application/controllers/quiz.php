@@ -98,7 +98,7 @@ class Quiz extends CI_Controller {
 		if($this->_no_such_user($phone)){
 			$this->reg_user($phone, $msg, $time);
 
-			$welcome_message = "Welcome to the Amazing Treasure Hunt:). Please reply with your name before we begin the hunt.\n{Powered by: Angani, Africa's Talking and SCI CodeJam}";
+			$welcome_message = "Welcome to the Amazing Treasure Hunt:). Please attempt the following techie written charades.\nPowered by: SCI CodeJam, Angani Ltd and Africa's Talking";
 			$this->send_new_sms($phone, $welcome_message, $sender);
 
 			#@deebeat_edits
@@ -121,11 +121,15 @@ class Quiz extends CI_Controller {
 
 				$this->quiz_model->probation_reset($phone);
 				#@Dennis send this next quetion to the user
-				$this->send_new_sms($phone, $next_que, $sender);
+
+				$probation_msg_again = "You are still on probation :(\n";
+				$this->send_new_sms($phone, $probation_msg_again.$next_que, $sender);
 
 			} else {
 				$probation_question = $this->redeem_message($this->redeemQue());
-				$this->send_new_sms($recipient, $probation_question, $sender);
+
+				$probation_entry_msg = "Sorry, you've answered wrong and you've been put on probation :D\n";
+				$this->send_new_sms($recipient, $probation_entry_msg.$probation_question, $sender);
 
 				#user failed the redemption question
 				$red_que = $this->redeemQue();
@@ -148,8 +152,10 @@ class Quiz extends CI_Controller {
 					$new_quest = $this->sendQue($phone);
 					$this->quiz_model->probation_reset($phone);
 
+					$congrats_msg = "Congratulations Hunter <3 :)\n";
+
 					#@deebeat-send user a new question
-					$this->send_new_sms($phone, $new_quest, $sender);
+					$this->send_new_sms($phone, $congrats_msg.$new_quest, $sender);
 
 				} else {
 					#only magic can get you here XD
@@ -164,8 +170,10 @@ class Quiz extends CI_Controller {
 	
 					$result = $this->prob_stats_update($phone, $var);
 
+					$same_ques_msg = "You missed it. Again! :p. You know the drill :D\n";
+
 					#@deebeat
-					$this->send_new_sms($phone, $same_question, $sender);
+					$this->send_new_sms($phone, $same_ques_msg.$same_question, $sender);
 				} else {
 					#notify user he is on probation and send him a redemption question
 					$red_que = $this->redeemQue();
@@ -175,8 +183,10 @@ class Quiz extends CI_Controller {
 					$msg = $this->redeem_message($red_que);
 					#Dennis pick the message to send here.
 
+					$in_probation_msg = "Ooh boy!!, Probation here i come ;(\n";
+
 					#@deebeat
-					$this->send_new_sms($phone, $msg, $sender);
+					$this->send_new_sms($phone, $in_probation_msg.$msg, $sender);
 
 				}
 			}
