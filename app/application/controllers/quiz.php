@@ -47,8 +47,8 @@ class Quiz extends CI_Controller {
 			#case 1, get the winners
 			if($params == "winners")
 			{
-			/*	
-				$i = 0;
+				
+				/*$i = 0;
 				$records = 0;
 				$data = array();
 
