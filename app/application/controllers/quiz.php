@@ -170,7 +170,7 @@ class Quiz extends CI_Controller {
 	
 					$result = $this->prob_stats_update($phone, $var);
 
-					$same_ques_msg = "You got nailed! You know the drill :D, sorry!\n\n";
+					$same_ques_msg = "You got nailed! You know the drill :-D, sorry!\n\n";
 
 					#@deebeat
 					$this->send_new_sms($phone, $same_ques_msg.$same_question, $sender);
