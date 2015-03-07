@@ -163,7 +163,7 @@ class Quiz_model extends CI_Model {
 		$result = $this->db->get('redemptions');
 
 		if ($result){
-			return true;
+			return $result;
 		} else {
 			return false;
 		}

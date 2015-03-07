@@ -17,7 +17,7 @@ class Quiz extends CI_Controller {
 	public function index()
 	{
 		#credentials
-		$username = "codejamer";
+		/*$username = "codejamer";
 		$apikey = "097b5f8c738a0bcfa8899ce0c7da3324a728c5921132e3b1c89065316fb00dae";
 
 		#details from the user
@@ -33,24 +33,15 @@ class Quiz extends CI_Controller {
 		if ($message_from_user == "hunt ")
 		{
 
-
-			#check db if the user already exists
-			#$this->quiz_model
-
-			#Welcome user and request their name
-			/*$welcome_message = "Welcome to the Amazing Treasure Hunt:). Please reply with your name before we begin the hunt.\n\nPowered by: SCI CodeJam";
-
-			$this->send_new_sms($phone_number, $succeeding_msg, $sender);*/
-
 			#send the user a question
 			$this->receive_user_msg($phone_number, $succeeding_msg, $current_date_time, $sender);
 
 			#$this->receive_user_msg($phone_number, $succeeding_msg, $current_date_time, $sender);
-		}
-		/*$phone_number = "+254720255774";
+		}*/
+		$phone_number = "+254720255774";
 		$msg = 'ner';
 		$time = date('Y-M-d h:m:s');
-		$sender = '2345';*/
+		$sender = '2345';
 
 		$this->receive_user_msg($phone_number, $msg, $time, $sender);
 
@@ -333,7 +324,6 @@ class Quiz extends CI_Controller {
    	 //Error message is important when the status is not Success
    	 echo $esult->errorMessage . "<br/>";
    	}
-   }
    catch(AfricasTalkingGatewayException $e){
    	echo $e->getMessage();
    }
