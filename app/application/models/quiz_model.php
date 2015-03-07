@@ -6,6 +6,7 @@ class Quiz_model extends CI_Model {
 	public function reg_user($data){
 		$status = $this->db->insert('members', $data);
 		if($status){
+			#insert the same user to the probation table
 			return true;
 		} else {
 			return false;
@@ -80,7 +81,9 @@ class Quiz_model extends CI_Model {
 		#get question number for this user and update(ready for next question)
 		$data['quiz_count'] = $this->get_question_count($phone) + 1;
 
-		if ($this->db->update('members', $data)->run()){
+		$result = $this->db->update('members',$data);
+
+		if ($result){
 			return true;
 		}
 		else
@@ -120,10 +123,24 @@ class Quiz_model extends CI_Model {
 
 	}
 	public function get_prob_stats($phone){
-		$result = $this->db->getwhere('members', array('phone'=>$phone));
+		$result = $this->db->get_where('members', array('phone'=>$phone));
 
 		if($result){
 			return $result;
+		} else {
+			return false;
+		}
+	}
+	public function prob_stats_update($phone,$var){
+		$data = array(
+			'probationFlag' => $var
+			);
+		
+		$this->db->where('phone',$phone);
+		$result = $this->db->update('members', $data);
+
+		if($result){
+			return true;
 		} else {
 			return false;
 		}
@@ -134,14 +151,14 @@ class Quiz_model extends CI_Model {
 			);
 
 		$this->db->where('phone', $phone);
-		$result = $this->db->update('probation', $data);
+		$result = $this->db->update('members', $data);
 		if($result){
 			return true;
 		} else {
 			return false;
 		}	
 	}
-	public function get_redeemQue($phone){
+	public function get_redeemQue(){
 		$this->db->select('owner');
 		$result = $this->db->get('redemptions');
 
@@ -153,7 +170,7 @@ class Quiz_model extends CI_Model {
 	}
 	public function on_probation($phone){
 
-		$result = $this->db->get_where('probation', array('phone' => $phone,'probation_status' => 1));
+		$result = $this->db->get_where('members', array('phone' => $phone,'probation_status' => 1));
 		if($result){
 			return $result;
 		} else {
@@ -189,8 +206,8 @@ class Quiz_model extends CI_Model {
 		}
 	}
 	public function redeem_module($var,$phone){
-		$result = $this->db->query("SELECT * FROM redemptions INNER JOIN probation ON probation.redeem_quest = redemptions.owner
-						WHERE redemptions.owner = $var AND probation.member_id = redemptions.member_id LIMIT 0 , 30");
+		$result = $this->db->query("SELECT * FROM redemptions INNER JOIN members ON members.redeem_quest = redemptions.owner
+						WHERE redemptions.owner = $var AND members.member_id = redemptions.member_id LIMIT 0 , 30");
 		if($result){
 			return true;
 		} else {

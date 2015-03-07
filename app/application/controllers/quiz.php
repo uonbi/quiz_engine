@@ -38,15 +38,21 @@ class Quiz extends CI_Controller {
 			#$this->quiz_model
 
 			#Welcome user and request their name
-			$welcome_message = "Welcome to the Amazing Treasure Hunt:). Please reply with your name before we begin the hunt.\n\nPowered by: SCI CodeJam";
+			/*$welcome_message = "Welcome to the Amazing Treasure Hunt:). Please reply with your name before we begin the hunt.\n\nPowered by: SCI CodeJam";
 
-			$this->send_new_sms($phone_number, $welcome_message, $sender);
+			$this->send_new_sms($phone_number, $welcome_message, $sender);*/
 
 			#send the user a question
 			#$this->receive_user_msg($phone_number, $succeeding_msg, $current_date_time, $sender);
 
 			$this->receive_user_msg($phone_number, $succeeding_msg, $current_date_time, $sender);
 		}
+		/*$phone_number = "+254720255774";
+		$msg = 'ner';
+		$time = date('Y-M-d h:m:s');
+		$sender = '2345';*/
+
+		$this->receive_user_msg($phone_number, $msg, $time, $sender);
 
 	}
 	
@@ -88,8 +94,8 @@ class Quiz extends CI_Controller {
 		if($this->_no_such_user($phone)){
 			$this->reg_user($phone, $msg, $time);
 
-			/*$welcome_message = "Welcome to the Amazing Treasure Hunt:). Please reply with your name before we begin the hunt.\n{Powered by: Angani, Africa's Talking and SCI CodeJam}";
-			$this->send_new_sms($phone, $welcome_message, $sender);*/
+			$welcome_message = "Welcome to the Amazing Treasure Hunt:). Please reply with your name before we begin the hunt.\n{Powered by: Angani, Africa's Talking and SCI CodeJam}";
+			$this->send_new_sms($phone, $welcome_message, $sender);
 
 			#@deebeat_edits
 			#send new user a question
@@ -104,7 +110,7 @@ class Quiz extends CI_Controller {
 
 			#validate redemption ans
 
-			$result = $this->redeem_validation($phone, $msg);
+			$result = $this->quiz_model->redeem_module($phone, $msg);
 			if($result){
 				#successfully redeemed his|herself
 				$next_que = $this->sendQue($phone);
@@ -125,7 +131,9 @@ class Quiz extends CI_Controller {
 		} else {
 			#answer validations
 			$result = $this->quiz_model->validate($phone, $msg, $time);
+
 			if($result){
+
 				#update quiz_count in the db
 				$res = $this->quiz_model->update_usr($phone);
 				if($res){
@@ -134,21 +142,22 @@ class Quiz extends CI_Controller {
 					#@deebeat-send user a new question
 					$this->send_new_sms($phone, $new_quest, $sender);
 
-					#update submission table
-					$this->db->update();
 				} else {
 					#only magic can get you here XD
 				}	
 
 			} else {
+	
 				#wrong answer was submitted
-				if($this->to_probation($phone) == false){
+				if($this->to_probation($phone) != true){
 					$same_question = $this->sendQue($phone);
+					$var = $this->prob_stats($phone) + 1;
+	
+					$result = $this->prob_stats_update($phone, $var);
 
 					#@deebeat
 					$this->send_new_sms($phone, $same_question, $sender);
 				} else {
-
 					#notify user he is on probation and send him a redemption question
 					$red_que = $this->redeemQue();
 					#update probation table with the users question
@@ -211,17 +220,17 @@ class Quiz extends CI_Controller {
 			return false;
 		}	
 		return $probationFlag;
+	}
+	public function prob_stats_update($phone, $var){
+		return $this->quiz_model->prob_stats_update($phone, $var);
 	}	
 	public function to_probation($phone){
 		$probationFlag = $this->prob_stats($phone);
 
-		if($probationFlag <= 3){
+		if($probationFlag == 3){
 			#put user on probation
-			if($this->quiz_model->to_probation($phone)){
-				return true;
-			} else { 
-				return false;
-			}
+			$this->quiz_model->to_probation($phone);
+			return true;
 
 		} else {
 			return false;
