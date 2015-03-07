@@ -93,11 +93,7 @@ class Quiz extends CI_Controller {
 		} elseif ($this->_on_probation($phone)) {
 
 			#validate redemption ans
-			$probation_question = $this->redeem_message($this->redeemQue());
-
-			$this->send_new_sms($recipient, $probation_question, $sender);
-
-			$result = $this->quiz_model->redeem_module($phone, $msg);
+			$result = $this->redeem_module($msg);
 			if($result){
 				#successfully redeemed his|herself
 				$next_que = $this->sendQue($phone);
@@ -106,6 +102,9 @@ class Quiz extends CI_Controller {
 				$this->send_new_sms($phone, $next_que, $sender);
 
 			} else {
+				$probation_question = $this->redeem_message($this->redeemQue());
+				$this->send_new_sms($recipient, $probation_question, $sender);
+
 				#user failed the redemption question
 				$red_que = $this->redeemQue();
 				$this->quiz_model->update_probation($phone, $red_que);

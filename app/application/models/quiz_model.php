@@ -194,7 +194,7 @@ class Quiz_model extends CI_Model {
 			);
 
 		$this->db->where('phone', $phone);
-		$result = $this->db->update('probation', $data);
+		$result = $this->db->update('members', $data);
 
 		if($result){
 			return true;
@@ -202,9 +202,10 @@ class Quiz_model extends CI_Model {
 			return false;
 		}
 	}
-	public function redeem_module($var,$phone){
+	public function redeem_module($var){
+		print_r($var);
 		$result = $this->db->query("SELECT * FROM redemptions INNER JOIN members ON members.redeem_quest = redemptions.owner
-						WHERE redemptions.owner = $var AND members.member_id = redemptions.member_id LIMIT 0 , 30");
+						WHERE redemptions.owner = '$var' AND members.member_id = redemptions.member_id LIMIT 0 , 30");
 		if($result){
 			return true;
 		} else {
