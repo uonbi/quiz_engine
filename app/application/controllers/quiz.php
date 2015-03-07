@@ -147,6 +147,7 @@ class Quiz extends CI_Controller {
 				$res = $this->quiz_model->update_usr($phone);
 				if($res){
 					$new_quest = $this->sendQue($phone);
+					$this->quiz_model->probation_reset($phone);
 
 					#@deebeat-send user a new question
 					$this->send_new_sms($phone, $new_quest, $sender);
