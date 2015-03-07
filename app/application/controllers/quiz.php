@@ -78,6 +78,17 @@ class Quiz extends CI_Controller {
 
 	#end_receive_new_sms(x, y)->@deebeat
 
+	public function recv_msg($phone, $msg, $time, $sender){
+		$data = array(
+			'phone' => $phone,
+			'msg'  => $msg,
+			'time' => $time,
+			'sender'=> $sender
+			);
+
+		return $data;
+	}
+
 	public function receive_user_msg($phone, $msg, $time, $sender){
 		#system access point
 		$msg = trim(strtolower($msg));
