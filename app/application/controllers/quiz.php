@@ -23,7 +23,7 @@ class Quiz extends CI_Controller {
 		#details from the user
 		$phone_number = $this->input->post('from');
 		$sender = $this->input->post('to');//shot code(sender)
-		$user_message = trim(strtolower($_REQUEST['from']));
+		$user_message = trim(strtolower($_REQUEST['text']));
 
 		$message_from_user = substr($user_message, 0, 5);
 		$succeeding_msg = substr($message_from_user, 5);
