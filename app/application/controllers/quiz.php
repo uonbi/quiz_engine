@@ -138,7 +138,11 @@ class Quiz extends CI_Controller {
 				$msg = $this->redeem_message($red_que);
 				#Dennis pick the message to send here.
 
+
 				$redemption_msq = "You failed the redemption question :D\n\n";
+
+				$redemption_msq = "You failed the redemption question :D\n\n"
+
 				$this->send_new_sms($phone, $redemption_msq.$msg, $sender);
 			}
 
