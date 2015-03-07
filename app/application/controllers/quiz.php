@@ -21,9 +21,9 @@ class Quiz extends CI_Controller {
 		$apikey = "097b5f8c738a0bcfa8899ce0c7da3324a728c5921132e3b1c89065316fb00dae";
 
 		#details from the user
-		$phone_number = $this->input->post('from');
-		$sender = $this->input->post('to');//shot code(sender)
-		$user_message = trim(strtolower($this->input->post('text')));
+		$phone_number = $_POST('from');
+		$sender = $this->$_POST('to');//shot code(sender)
+		$user_message = trim(strtolower($_POST('text')));
 
 		$message_from_user = substr($user_message, 0, 5);
 		$succeeding_msg = substr($message_from_user, 6);
