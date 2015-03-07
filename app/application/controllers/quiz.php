@@ -29,6 +29,7 @@ class Quiz extends CI_Controller {
 		$succeeding_msg = substr($message_from_user, 5);
 
 		$current_date_time = date("Y-m-d H:i:s");
+		die($succeeding_msg);
 
 		if ($message_from_user == "hunt ")
 		{
