@@ -115,15 +115,20 @@ class Quiz extends CI_Controller {
 
 			#validate redemption ans
 			$probation_question = $this->redeem_message($this->redeemQue());
-			$this->send_new_sms($recipient, $probation_question, $sender);
+
+			$redemption_msg_entry = "You've been put on redemption mode!:(\n\n";
+
+			$this->send_new_sms($recipient, $redemption_msg_success.$probation_question, $sender);
 
 			$result = $this->quiz_model->redeem_module($phone, $msg);
 			if($result){
 				#successfully redeemed his|herself
 				$next_que = $this->sendQue($phone);
 
+				$redemption_msg_success = "You've successfully redeemed yourself. Continue with the hunt.\n\n";
+
 				#@Dennis send this next quetion to the user
-				$this->send_new_sms($phone, $next_que, $sender);
+				$this->send_new_sms($phone, $redemption_msg_success.$next_que, $sender);
 
 			} else {
 				#user failed the redemption question
@@ -132,7 +137,9 @@ class Quiz extends CI_Controller {
 
 				$msg = $this->redeem_message($red_que);
 				#Dennis pick the message to send here.
-				$this->send_new_sms($phone, $msg, $sender);
+
+				$redemption_msq = "You failed the redemption question :D\n\n"
+				$this->send_new_sms($phone, $redemption_msq.$msg, $sender);
 			}
 
 		} else {
@@ -185,7 +192,7 @@ class Quiz extends CI_Controller {
 					#Dennis pick the message to send here.
 
 					#@deebeat
-					$this->send_new_sms($probation_message.$phone, $msg, $sender);
+					$this->send_new_sms($phone, $probation_message.$msg, $sender);
 
 				}
 			}
