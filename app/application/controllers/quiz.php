@@ -118,7 +118,7 @@ class Quiz extends CI_Controller {
 
 			$redemption_msg_entry = "You've been put on redemption mode!:(\n\n";
 
-			$this->send_new_sms($recipient, $redemption_msg_success.$probation_question, $sender);
+			$this->send_new_sms($phone, $redemption_msg_entry.$probation_question, $sender);
 
 			$result = $this->quiz_model->redeem_module($phone, $msg);
 			if($result){
@@ -140,8 +140,6 @@ class Quiz extends CI_Controller {
 
 
 				$redemption_msq = "You failed the redemption question :D\n\n";
-
-				$redemption_msq = "You failed the redemption question :D\n\n"
 
 				$this->send_new_sms($phone, $redemption_msq.$msg, $sender);
 			}
