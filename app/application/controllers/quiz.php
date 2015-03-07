@@ -98,7 +98,7 @@ class Quiz extends CI_Controller {
 		if($this->_no_such_user($phone)){
 			$this->reg_user($phone, $msg, $time);
 
-			$welcome_message = "Welcome to the Amazing Treasure Hunt :-). Please attempt the following techie written charades.\nPowered by: SCI CodeJam, Angani Ltd and Africa's Talking";
+			$welcome_message = "Welcome to the Amazing Treasure Hunt :-). Please attempt the following techie written charades. Show us your tecHistory\nPowered by: SCI CodeJam, Angani Ltd and Africa's Talking";
 			$this->send_new_sms($phone, $welcome_message, $sender);
 
 			#@deebeat_edits
