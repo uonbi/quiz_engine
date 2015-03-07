@@ -83,7 +83,7 @@ class Quiz_model extends CI_Model {
 
 		#$result = $this->db->update('members',$data);
 
-		$this->db->query("UPDATE members SET quiz_count = $data WHERE phone = $phone");
+		$this->db->query("UPDATE members SET quiz_count = ".$data." WHERE phone = ".$phone);
 
 		if ($result){
 			return true;
