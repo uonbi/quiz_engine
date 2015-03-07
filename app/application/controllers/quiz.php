@@ -36,7 +36,7 @@ class Quiz extends CI_Controller {
 			#send the user a question
 			$this->receive_user_msg($phone_number, $succeeding_msg, $current_date_time, $sender);
 		}
-		
+
 	}
 	
 
@@ -94,6 +94,7 @@ class Quiz extends CI_Controller {
 
 			#validate redemption ans
 			$probation_question = $this->redeem_message($this->redeemQue());
+
 			$this->send_new_sms($recipient, $probation_question, $sender);
 
 			$result = $this->quiz_model->redeem_module($phone, $msg);
@@ -232,14 +233,19 @@ class Quiz extends CI_Controller {
 		$owners = array();
 
 		$result = $this->quiz_model->get_redeemQue();
+
 		if ($result){
 			foreach ($result->result() as $row) {
 				$owners[$index] = $row->owner;
+				#echo $owners[$index];
 				$index += 1;
 			}
 
+			/*print_r($owners);*/
 			$random_que = array_rand($owners,1);
-			return $random_que;
+			$question = $owners[$random_que];
+
+			return $question;
 
 		} else {
 			return false;
@@ -265,7 +271,7 @@ class Quiz extends CI_Controller {
 		}
 	}
 	public function redeem_message($code_owner){
-		$redeem_msg = 'You on probation. Submit the '+$code_owner+' from their stand to reedem yourself';
+		$redeem_msg = 'You are on probation. Submit the '.$code_owner.' from their stand|tree to reedem yourself';
 		return $redeem_msg;
 	}	
 	public function redeem_module($var){
