@@ -30,7 +30,7 @@ class Quiz extends CI_Controller {
 
 		$current_date_time = date("Y-m-d H:i:s");
 
-		if ($message_from_user == "hunt ")
+		if ($message_from_user == "hunt " || $message_from_user == "jam ")
 		{
 
 			#send the user a question
