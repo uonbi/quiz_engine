@@ -34,19 +34,23 @@ class Quiz extends CI_Controller {
 		$current_date = date("Y-m-d");
 		$date_array = ["2015-03-07", "2015-03-08"];
 
-		if(!in_array($current_date, $date_array))
-		{
-			$message = "Sorry, the treasure hunt is over! Messages sent from now on will be charged.\n\n[SCI CodeJam]";
-			$this->send_new_sms($recipient, $message, $sender);
-			#echo $message;
-			exit();
-		}
 
-		if ($message_from_user == "hunt " || $message_from_user == "jam ")
+		if ($message_from_user == "hunt ")
 		{
-
-			#send the user a question
-			$this->receive_user_msg($phone_number, $succeeding_msg, $current_date_time, $sender);
+			if(!in_array($current_date, $date_array))
+			{
+				$message = "Sorry, the treasure hunt is over! Messages sent from now on will be charged.\n\n[SCI CodeJam]";
+				$this->send_new_sms($recipient, $message, $sender);
+				#echo $message;
+				exit();
+			}
+			
+			else
+			{
+				#send the user a question
+				$this->receive_user_msg($phone_number, $succeeding_msg, $current_date_time, $sender);
+			}
+			
 		}
 
 		#admin module
