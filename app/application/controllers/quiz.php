@@ -25,6 +25,7 @@ class Quiz extends CI_Controller {
 		$sender = $this->input->post('to');//shot code(sender)
 		$user_message = trim(strtolower($this->input->post('text')));
 
+
 		$message_from_user = substr($user_message, 0, 5);
 		$succeeding_msg = substr($user_message, 5);
 
@@ -37,11 +38,11 @@ class Quiz extends CI_Controller {
 
 		if ($message_from_user == "hunt ")
 		{
+
 			if(!in_array($current_date, $date_array))
 			{
 				$message = "Sorry, the treasure hunt is over! Messages sent from now on will be charged.\n\n[SCI CodeJam]";
 				$this->send_new_sms("+254725332343", $message, "22548");
-				echo $message;
 				exit();
 			}
 
