@@ -246,6 +246,7 @@ class Quiz_model extends CI_Model {
 												INNER JOIN airtime_winners
 												ON members.member_id = airtime_winners.member_id ORDER BY date_time ASC LIMIT 20");
 
+		
 		if($winners)
 		{
 			return $winners;

@@ -30,7 +30,7 @@ class Quiz extends CI_Controller {
 
 		$current_date_time = date("Y-m-d H:i:s");
 
-		if ($message_from_user == "hunt ")
+		if ($message_from_user == "hunt " || $message_from_user == "jam ")
 		{
 
 			#send the user a question
@@ -47,19 +47,20 @@ class Quiz extends CI_Controller {
 			#case 1, get the winners
 			if($params == "winners")
 			{
-				$winners = $this->quiz_model->admin_get_winners();
-
+				
+				/*$i = 0;
+				$records = 0;
 				$data = array();
 
-				foreach($winners->result() as $row)
-				{
-					$data['phone'] = $row->phone;
-					$data['name'] = $row->name;
+				foreach ($result->result() as $row) {
+					$data[$i][$records] = $row->phone;
+					$data[$i][$records+1] = $row->name;
+					$records+=1;
 				}
 
-				$header_msg = "Hi admin(".$phone_number."), Winner's numbers are as followes::\n\n";
+				$header_msg = "Hi admin(".$phone_number."), Winner's numbers are as followes::\n\n";*/
 
-				$this->send_new_sms($phone_number, $header_msg.$data, $sender);
+				$this->send_new_sms($phone_number, 'suusp', $sender);
 
 			}
 			
@@ -67,7 +68,6 @@ class Quiz extends CI_Controller {
 		}
 
 	}
-	
 
 	#send sms to a user
 	public function send_new_sms($recipient, $new_question, $sender)
@@ -136,7 +136,7 @@ class Quiz extends CI_Controller {
 			} else {
 				$probation_question = $this->redeem_message($this->redeemQue());
 
-				$probation_entry_msg = "Sorry, Hurry up, probation awaits :-D\n\n";
+				$probation_entry_msg = "Sorry, Watch it! Probation awaits :-D\n\n";
 				$this->send_new_sms($recipient, $probation_entry_msg.$probation_question, $sender);
 
 				#user failed the redemption question
