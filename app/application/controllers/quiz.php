@@ -63,9 +63,17 @@ class Quiz extends CI_Controller {
 
 			#case 1, get the winners
 			
-				$header_msg = "Hi admin(".$phone_number."), Winner's numbers are as followes::\n\n";
+				$header_msg = "Hi admin(".$phone_number."), Winner's numbers are as follows::\n\n";
 
-				$this->send_new_sms($phone_number, $header_msg, $sender);
+				$winners = $this->quiz_model->get_winners();
+				$numbers = array();
+				foreach($winners->result() as $key)
+				{
+					$winner = $key->phone;
+					array_push($numbers, $winner);
+				}
+
+				$this->send_new_sms($phone_number, $header_msg.$numbers, $sender);
 
 			
 
