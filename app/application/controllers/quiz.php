@@ -66,11 +66,11 @@ class Quiz extends CI_Controller {
 				$header_msg = "Hi admin(".$phone_number."), Winner's numbers are as follows::\n\n";
 
 				$winners = $this->quiz_model->get_winners();
-				$numbers = array();
+				$numbers = "";
 				foreach($winners->result() as $key)
 				{
 					$winner = $key->phone;
-					array_push($numbers, $winner);
+					$numbers .= $winner.',';
 				}
 
 				$this->send_new_sms($phone_number, $header_msg.$numbers, $sender);
