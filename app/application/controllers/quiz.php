@@ -62,24 +62,11 @@ class Quiz extends CI_Controller {
 			$params = trim(substr($message_from_user, 5));
 
 			#case 1, get the winners
-			if($params == "winners")
-			{
-				
-				/*$i = 0;
-				$records = 0;
-				$data = array();
+			
+				$header_msg = "Hi admin(".$phone_number."), Winner's numbers are as followes::\n\n";
 
-				foreach ($result->result() as $row) {
-					$data[$i][$records] = $row->phone;
-					$data[$i][$records+1] = $row->name;
-					$records+=1;
-				}
+				$this->send_new_sms($phone_number, $header_msg, $sender);
 
-				$header_msg = "Hi admin(".$phone_number."), Winner's numbers are as followes::\n\n";*/
-
-				$this->send_new_sms($phone_number, 'suusp', $sender);
-
-			}
 			
 
 		}
