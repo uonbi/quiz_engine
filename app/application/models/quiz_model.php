@@ -226,16 +226,8 @@ class Quiz_model extends CI_Model {
 
 		if($correct_answers)
 		{
-			#phone numbers array
-			 /*$new_array = array();
-			 foreach($correct_answers as $point){
-			      $new_array[] = array(
-			        'phone' => $point->phone
-			      );
-			 }*/
-	
+		
 			 return $correct_answers;
-			 #return $correct_answers;
 		}
 		else
 		{
