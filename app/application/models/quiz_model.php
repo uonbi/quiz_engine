@@ -222,14 +222,20 @@ class Quiz_model extends CI_Model {
 	{
 		$correct_status = 1;
 		#get from db the first 20 correct submissions
-		$correct_answers = $this->db->query("SELECT phone FROM members 
-												INNER JOIN airtime_winners
-												ON members.member_id = airtime_winners.member_id ORDER BY date_time ASC LIMIT 20");
+		$correct_answers = $this->db->query("SELECT phone FROM members WHERE quiz_count >= 6");
 
 		if($correct_answers)
 		{
 			#phone numbers array
-			return $correct_answers;
+			 /*$new_array = array();
+			 foreach($correct_answers as $point){
+			      $new_array[] = array(
+			        'phone' => $point->phone
+			      );
+			 }*/
+	
+			 return $correct_answers;
+			 #return $correct_answers;
 		}
 		else
 		{
@@ -237,6 +243,19 @@ class Quiz_model extends CI_Model {
 		}
 
 		#update a field to keep count of people who reach threshold
+	}
+
+	private function object_to_array($data)
+	{
+	    if (is_object($data)) {
+	         $data = get_object_vars($data);
+	    }
+	    if (is_array($data)) {
+	          return array_map(__FUNCTION__, $data);
+	    }
+	     else {
+	          return $data;
+	    }
 	}
 
 	#function admin_get_winners() to go to the model
@@ -257,4 +276,5 @@ class Quiz_model extends CI_Model {
 		}
 
 	}
+
 }

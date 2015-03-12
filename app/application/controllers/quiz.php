@@ -42,7 +42,7 @@ class Quiz extends CI_Controller {
 			if(!in_array($current_date, $date_array))
 			{
 				$message = "Sorry, the treasure hunt is over! Messages sent from now on will be charged.\n\n[SCI CodeJam]";
-				$this->send_new_sms("+254725332343", $message, "22548");
+				$this->send_new_sms($phone_number, $message, $sender);
 				exit();
 			}
 
