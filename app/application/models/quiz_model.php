@@ -237,19 +237,6 @@ class Quiz_model extends CI_Model {
 		#update a field to keep count of people who reach threshold
 	}
 
-	private function object_to_array($data)
-	{
-	    if (is_object($data)) {
-	         $data = get_object_vars($data);
-	    }
-	    if (is_array($data)) {
-	          return array_map(__FUNCTION__, $data);
-	    }
-	     else {
-	          return $data;
-	    }
-	}
-
 	#function admin_get_winners() to go to the model
 	public function admin_get_winners()
 	{
