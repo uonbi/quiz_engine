@@ -222,7 +222,7 @@ class Quiz_model extends CI_Model {
 	{
 		$correct_status = 1;
 		#get from db the first 20 correct submissions
-		$correct_answers = $this->db->query("SELECT phone FROM members WHERE quiz_count >= 6");
+		$correct_answers = $this->db->query("SELECT name,phone FROM members WHERE quiz_count >= 6");
 
 		if($correct_answers)
 		{

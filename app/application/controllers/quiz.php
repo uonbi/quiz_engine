@@ -70,7 +70,8 @@ class Quiz extends CI_Controller {
 				foreach($winners->result() as $key)
 				{
 					$winner = $key->phone;
-					$numbers .= $winner.',';
+					$name = $key->name;
+					$numbers .= $name.'->'$winner."\n";
 				}
 
 				$this->send_new_sms($phone_number, $header_msg.$numbers, $sender);
