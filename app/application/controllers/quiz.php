@@ -8,12 +8,14 @@ class Quiz extends CI_Controller {
 
 	private $data;
 	
+	/*Initialization point*/
 	function __construct(){
 		parent::__construct();
 
 		$this->load->model('quiz_model');
 	}
 
+	/*Entry point*/
 	public function index()
 	{
 		#credentials
@@ -350,6 +352,7 @@ class Quiz extends CI_Controller {
 		//Example shown assumes we want to send KES 100 to two numbers
 		// Please ensure you include the country code for phone numbers (+254 for Kenya in this case)
 		
+		/*Read and load phone numbers from get_winners() module in the quiz_model*/
 		$recipients = array(
 		                array("phoneNumber"=>"+254700XXXYYY", "amount"=>"KES 100"),
 					             array("phoneNumber"=>"+254733YYYZZZ", "amount"=>"KES 100")
