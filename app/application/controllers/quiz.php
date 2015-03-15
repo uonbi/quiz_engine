@@ -394,15 +394,16 @@ class Quiz extends CI_Controller {
 		#array of phone numbers
 		$awardees_phones = $this->quiz_model->get_winners();
 
-		#award airtime to each number here
-		foreach($awardees_phones as $single_phone)
-		{
-			$phone = $this->$single_phone;
+		$winning_numbers = '';
 
-			#call the send airtime module here
-			#get random number from
+		foreach($awardees_phones->result() as $key)
+		{
+
+			$winning_numbers .= $key->phone.",";
 
 		}
+
+		return $winning_numbers;
 	}
 
 }
